@@ -2,3 +2,4 @@
 
 this is a readme
 Ian Wong
+Kelsey Valencia
