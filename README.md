@@ -3,6 +3,6 @@
 Project Team Members:
 Ian Wong
 Kelsey Valencia
-Nikkii Fox
+Nikkii Fox | Correct the Changes made by Nikkii
 Andrew Settergren
 Alex Sorensen
