@@ -5,3 +5,4 @@ Ian Wong
 Kelsey Valencia
 Niccole Fox
 Andrew Settergren
+Alex Sorensen
