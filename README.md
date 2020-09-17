@@ -2,4 +2,4 @@
 
 Project team members:
 Ian Wong
-Nikkii was here | Correct changes made by Ian
+Nikkii was here | No corrections needed
