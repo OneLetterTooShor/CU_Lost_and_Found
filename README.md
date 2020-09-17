@@ -6,4 +6,4 @@ Ian Wong
 Kelsey Valencia
 Niccole Fox
 Andrew Settergren
-Alex Sorensen
+Alex Sorensen | Correct the changes made by Alex
