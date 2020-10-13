@@ -7,7 +7,17 @@
       </head>
       <body>
         <!--This is the section for the navbar. Make sure to include on all html pages.-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <style>
+          .navbar.navbar-expand-lg.navbar-dark.bg-black
+          {
+            background-color: black;
+            color: white;
+            height: 65px;
+          }
+
+        </style>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
           <a class="navbar-brand" href="index.html">
             <img class="rounded-circle" src="../resources/images/favicon.ico" alt="" width="30" height="30">
           </a>
@@ -93,13 +103,25 @@
       </div>
 
 
-
-
+      <!--This is the section for the footer. Make sure to include on all html pages.-->
+      <style>
+        .footer{
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          padding: 13px;
+          height: 65px;
+          font-size: 25px;
+          background-color: black;
+          text-align: center;
+          color: white !important;
+        }
+        </style>
         
-
-
-
-
+        <div class="footer">
+          <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>
+        </div>
+        <!--End footer section-->
 
       </body>
     </html>
