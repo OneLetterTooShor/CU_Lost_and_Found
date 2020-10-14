@@ -6,7 +6,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       </head>
       <body>
-        <!--This is the section for the navbar. Make sure to include on all html pages.-->
+      <!--This is the section for the navbar. Make sure to include on all html pages.-->
+        <style>
+          .navbar.navbar-expand-lg.navbar-dark.bg-black
+          {
+            background-color: black;
+            color: white;
+            height: 65px;
+          }
+
+        </style>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <a class="navbar-brand" href="index.html">
             <img class="rounded-circle" src="../resources/images/favicon.ico" alt="" width="30" height="30">
@@ -41,6 +50,73 @@
         </nav>
         <!--End Navbar section-->
 
+        <!-- Header of page -->
+        <style>
+          .top-description 
+          {
+          padding: 50px;
+          text-align: center;
+          background-color: #a58d4f;
+          color: whitesmoke;
+          }
+
+        </style>
+        <div class = "top-description">
+          <h1> CU Lost & Found </h1>
+        </div>
+        <br>
+        <!-- End Header -->
+
+        <div class="jumbotron">
+          <h1 class="display-4">Welcome to CU Lost & Found</h1>
+          <p class="lead">Search for or post lost items</p>
+        </div>
+        <br>
+
+        <div class="container p-3 my-3 border">
+          <div class="card-deck">
+            <div class="card" style="width: 18rem;" id="goal1">
+              <img class="card-img-top" src="https://via.placeholder.com/500">
+              <h2>Search for lost items</h2>
+              <br>
+              <p>Search through posts for lost items</p>
+            </div>
+  
+            <div class="card" style="width: 18rem;" id="goal2">
+                <img class="card-img-top" src="https://via.placeholder.com/500">
+                <h2>Post found items</h2>
+                <br>
+                <p>Post a description and picture of an item you found</p>
+            </div>
+  
+            <div class="card" style="width: 18rem;" id="goal3">
+                <img class="card-img-top" src="https://via.placeholder.com/500">
+                <h2>About Us</h2>
+                <br>
+                <p>Learn about the team that developed this application</p>
+            </div>
+          </div>
+        </div>
+
+        <!--This is the section for the footer. Make sure to include on all html pages.-->
+          <style>
+            .footer{
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              padding: 13px;
+              height: 65px;
+              font-size: 25px;
+              background-color: black;
+              text-align: center;
+              color: white !important;
+            }
+          </style>
+          
+          <div class="footer">
+            <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>
+          </div>
+        <!--End footer section-->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
