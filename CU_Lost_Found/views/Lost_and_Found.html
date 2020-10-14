@@ -3,11 +3,12 @@
       <head>
         <title>Home</title>
         <link rel="stylesheet" href="../resources/css/main.css">
+        <link rel="stylesheet" href="../resources/css/lost_found.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       </head>
       <body>
         <!--This is the section for the navbar. Make sure to include on all html pages.-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
           <a class="navbar-brand" href="index.html">
             <img class="rounded-circle" src="../resources/images/favicon.ico" alt="" width="30" height="30">
           </a>
@@ -40,6 +41,77 @@
           </div>
         </nav>
         <!--End Navbar section-->
+
+      <div class="body_content">
+        <div class="jumbotron">
+          <h1 class="display-4">Lost and Found Page</h1>
+          <p class="lead">Have you lost or found an item laying around campus recently? If so, please look below to find out information on how you can help students find lost items or to search
+            for items you have lost on campus.
+          </p>
+          <hr class="my-4">
+          <div class="lost float-left">
+            <p>This section is meant for users that have lost an item and would like to begin a search for their lost item.</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button">Search Lost Items</a>
+            </p>
+          </div>
+          <div class="found float-right">
+            <p>This section is meant for users that have found an item and would like to post a listing of the found item.</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button">Post Found Items</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search item by keyword" aria-label="Search Item" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Search</button>
+            </div>
+          </div>
+          <div class="card-columns">
+            <div class="card">
+              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Item Name/Keyword</h5>
+                <p class="card-text">Description/Details</p>
+                <p class="card-text">Found Near</p>
+                <p class="card-text">Turned in at:</p>
+                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Item Name/Keyword</h5>
+                <p class="card-text">Description/Details</p>
+                <p class="card-text">Found Near</p>
+                <p class="card-text">Turned in at:</p>
+                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Item Name/Keyword</h5>
+                <p class="card-text">Description/Details</p>
+                <p class="card-text">Found Near</p>
+                <p class="card-text">Turned in at:</p>
+                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
+              </div>
+            </div>
+          </div>
+            <p style="padding-top:2em;">Disclaimer: All Lost and Found Item's that are retrieved by a student are kept on record. If you have lost an item and noticed that the item has been picked up by another student,
+            please follow the appeal process <a href="#">here</a>.
+          </p>
+          </div>
+
+        </div>
+        </div>
+        <div class="footer">
+          <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>
+        </div>
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
