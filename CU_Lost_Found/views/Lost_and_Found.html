@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="../resources/css/main.css">
+        <link rel="stylesheet" href="../resources/css/lost_found.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      </head>
+      <body>
+        <!--This is the section for the navbar. Make sure to include on all html pages.-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+          <a class="navbar-brand" href="index.html">
+            <img class="rounded-circle" src="../resources/images/favicon.ico" alt="" width="30" height="30">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+              <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="Lost_and_Found.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Lost & Found
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="Lost_and_Found.html">Search for Item</a>
+                  <a class="dropdown-item" href="Lost_and_Found.html">Post Found Item</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="Lost_and_Found.html">Lost & Found Page</a>
+                </div>
+              </li>
+            </ul>
+          <div class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Login</button>
+          </div>
+          </div>
+        </nav>
+        <!--End Navbar section-->
+
+      <div class="body_content">
+        <div class="jumbotron">
+          <h1 class="display-4">Lost and Found Page</h1>
+          <p class="lead">Have you lost or found an item laying around campus recently? If so, please look below to find out information on how you can help students find lost items or to search
+            for items you have lost on campus.
+          </p>
+          <hr class="my-4">
+          <div class="lost float-left">
+            <p>This section is meant for users that have lost an item and would like to begin a search for their lost item.</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#BC8E48; border-color:#BC8E48;">Search Lost Items</a>
+            </p>
+          </div>
+          <div class="found float-right">
+            <p>This section is meant for users that have found an item and would like to post a listing of the found item.</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" data-toggle="modal" data-target="#found_items_popout">Post Found Items</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search item by keyword" aria-label="Search Item" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Search</button>
+            </div>
+          </div>
+          <div class="card-columns">
+            <div class="card">
+              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Item Name/Keyword</h5>
+                <p class="card-text">Description/Details</p>
+                <p class="card-text">Found Near</p>
+                <p class="card-text">Turned in at:</p>
+                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Item Name/Keyword</h5>
+                <p class="card-text">Description/Details</p>
+                <p class="card-text">Found Near</p>
+                <p class="card-text">Turned in at:</p>
+                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Item Name/Keyword</h5>
+                <p class="card-text">Description/Details</p>
+                <p class="card-text">Found Near</p>
+                <p class="card-text">Turned in at:</p>
+                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
+              </div>
+            </div>
+          </div>
+            <p style="padding-top:2em;">Disclaimer: All Lost and Found Item's that are retrieved by a student are kept on record. If you have lost an item and noticed that the item has been picked up by another student,
+            please follow the appeal process <a href="#">here</a>.
+          </p>
+          </div>
+
+        </div>
+        </div>
+        <div class="footer">
+          <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>
+        </div>
+
+                <!-- Modal -->
+        <div class="modal fade" id="found_items_popout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Found Items</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Here we can put in fields that allow the user to input a picture file, description, date founded, item location (stored), so forth.testsetsetsetste
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Post Item</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      </body>
+    </html>
