@@ -118,13 +118,37 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Found Items TEST</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Post Lost Item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                Here we can put in fields that allow the user to input a picture file, description, date founded, item location (stored), so forth.testsetsetsetste
+                <div class="modal-body">
+                  <div class="form-group">
+                    <h6>Item Name</h6>
+                    <input type="text" id="itemName" class="form-control" name="itemName" required="required">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <h6>Item Description</h6>
+                    <p><i>Include the brand, color, and any identifying markings</i></p>
+                    <input type="text" id= "itemDescription" class="form-control" name="itemDescription" required="required" style="height:80px;">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <h6>Date Found</h6>
+                    <input type="text" id="dateFound" class="form-control" name="dateFound" required="required">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <h6>Location Found</h6>
+                    <input id="locationFound" type="password" class="form-control" name="locationFound" required="required">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <h6>Location Returned</h6>
+                    <input id="cpsw" type="password" class="form-control" name="locationReturned">
+                  </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
