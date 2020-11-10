@@ -18,21 +18,10 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="Lost_and_Found.html">Lost & Found</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About Us</a>
-              </li>
-              <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="Lost_and_Found.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Lost & Found
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="Lost_and_Found.html">Search for Item</a>
-                  <a class="dropdown-item" href="Lost_and_Found.html">Post Found Item</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="Lost_and_Found.html">Lost & Found Page</a>
-                </div>
               </li>
             </ul>
           <div class="form-inline my-2 my-lg-0">
@@ -44,22 +33,21 @@
 
       <div class="body_content">
         <div class="jumbotron">
-          <h1 class="display-4">Lost and Found Page</h1>
-          <p class="lead">Have you lost or found an item laying around campus recently? If so, please look below to find out information on how you can help students find lost items or to search
-            for items you have lost on campus.
+          <h1 class="display-4"><center>CU Boulder's<br>Lost & Found Page</h1></center>
+          <p><center>Have you lost or found an item laying around campus recently?<br>If so, please continue below to post a new listing or search for a lost item.</center>
           </p>
           <hr class="my-4">
           <div class="lost float-left">
-            <p>This section is meant for users that have lost an item and would like to begin a search for their lost item.</p>
-            <p class="lead">
+            <p><center>Start here if you would like to begin<br>a search for a lost item.</center></p>
+            <p class="lead"><center>
               <a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#BC8E48; border-color:#BC8E48;">Search Lost Items</a>
-            </p>
+            </center></p>
           </div>
           <div class="found float-right">
-            <p>This section is meant for users that have found an item and would like to post a listing of the found item.</p>
-            <p class="lead">
-              <a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" data-toggle="modal" data-target="#found_items_popout" onclick="resetModal(); openModal()">Post Found Items</a>
-            </p>
+            <p><center>Start here if you would like to post a<br>listing for a found item.</center></p>
+            <p class="lead"><center>
+              <a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" data-toggle="modal" data-target="#found_items_popout" onclick="resetModal(); openModal();">Post Found Items</a>
+            </center></p>
           </div>
         </div>
 
@@ -76,7 +64,7 @@
 
 
           </div>
-            <p style="padding-top:2em;">Disclaimer: All Lost and Found Item's that are retrieved by a student are kept on record. If you have lost an item and noticed that the item has been picked up by another student,
+            <p style="padding-top:2em;">Disclaimer: All items retrieved by students are kept on record. If you have lost an item and feel that it has been wrongfully claimed,
             please follow the appeal process <a href="#">here</a>.
           </p>
           </div>
@@ -99,35 +87,44 @@
               </div>
                 <form id="modalForm">
                           <div class="modal-body">
+                            <p style="font-size:13px; color:red">*Required field</p>
                             <div class="form-group">
-                              <h6>Item Name</h6>
-                              <input type="text" id="itemName" class="form-control" name="itemName" required>
+                              <h6>Item Name</h6> <h6 style="color:red">*</h6>
+                              <input type="text" id="itemName" class="form-control" name="itemName">
                             </div>
                             <br>
                             <div class="form-group">
-                              <h6>Item Description</h6>
-                              <p><i>Include the brand, color, and any identifying markings</i></p>
-                              <input type="text" id= "itemDescription" class="form-control" name="itemDescription" required style="height:80px;">
+                              <h6>Item Description</h6> <h6 style="color:red">*</h6>
+                              <p style="font-size:13px;"><i>Include the brand, color, and any identifying markings</i></p>
+                              <textarea id= "itemDescription" form="modalForm" name="itemDescription" rows="3" cols="55"></textarea>
                             </div>
                             <br>
                             <div class="form-group">
-                              <h6>Date Found</h6>
-                              <input type="text" id="dateFound" class="form-control" name="dateFound" required>
+                              <h6>Date Found</h6> <h6 style="color:red">*</h6>
+                              <input type="text" id="dateFound" class="form-control" name="dateFound" >
                             </div>
                             <br>
                             <div class="form-group">
-                              <h6>Location Found</h6>
-                              <input id="locationFound" type="text" class="form-control" name="locationFound" required>
+                              <h6>Location Found</h6> <h6 style="color:red">*</h6>
+                              <input id="locationFound" type="text" class="form-control" name="locationFound" >
                             </div>
                             <br>
                             <div class="form-group">
                               <h6>Location Returned</h6>
                               <input id="locationReturned" type="text" class="form-control" name="locationReturned">
                             </div>
+                            <div class="form-group">
+                            <br>
+                            <h6>Upload photo(s):</h6>
+                            <p style="font-size:13px;"><i>To select multiple files, hold down the CTRL or SHIFT key while selecting</i></p>
+                              <form action="/action_page.php"> <!-- https://www.w3schools.com/howto/howto_html_file_upload_button.asp -->
+                                  <input type="file" id="imageFile" name="filename" multiple>
+                              </form>
+                            </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" id="post_item_button" class="btn btn-primary" data-dismiss="modal" onclick="addCard()" disabled="True">Post Item</button>
+                          <button type="button" id="post_item_button" class="btn btn-primary" onclick="addCard()">Post Item</button>
                 </form>
 
               </div>
