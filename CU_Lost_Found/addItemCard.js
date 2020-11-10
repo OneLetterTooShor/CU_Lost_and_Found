@@ -14,12 +14,12 @@ function addCard(inp)
   var location_returned = document.getElementById("locationReturned").value;
 
   if(name.length == 0) {
-    alert("Name is required!");
+    alert("Item name is required!");
     return;
   }
 
   else if(description.length ==0) {
-    alert("Description is required!");
+    alert("Item description is required!");
     return;
   }
 
