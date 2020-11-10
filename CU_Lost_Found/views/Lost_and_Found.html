@@ -70,43 +70,9 @@
               <button class="btn btn-outline-secondary" type="button">Search</button>
             </div>
           </div>
-
-          <div class="card-columns">
-            <div class="card">
-              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Item Name/Keyword</h5>
-                <p class="card-text">Description/Details</p>
-                <p class="card-text">Found Near</p>
-                <p class="card-text">Turned in at:</p>
-                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
-              </div>
-            </div>
-            <div class="card">
-              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Item Name/Keyword</h5>
-                <p class="card-text">Description/Details</p>
-                <p class="card-text">Found Near</p>
-                <p class="card-text">Turned in at:</p>
-                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
-              </div>
-            </div>
-            <div class="card">
-              <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Item Name/Keyword</h5>
-                <p class="card-text">Description/Details</p>
-                <p class="card-text">Found Near</p>
-                <p class="card-text">Turned in at:</p>
-                <p class="card-text"><small class="text-muted">Posted 10/14/2020 12:00 PM</small></p>
-              </div>
-            </div>
-
           <div class="card-columns" id="cardPlaceholder" style="column-count: 1;">
             <!-- maybe have just 1 column of wide cards with each card split (left title and pic and right side rest?)
             will be hard to input my 3s -->
-
 
 
           </div>
@@ -131,38 +97,6 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-
-                <div class="modal-body">
-                  <div class="form-group">
-                    <h6>Item Name</h6>
-                    <input type="text" id="itemName" class="form-control" name="itemName" required="required">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <h6>Item Description</h6>
-                    <p><i>Include the brand, color, and any identifying markings</i></p>
-                    <input type="text" id= "itemDescription" class="form-control" name="itemDescription" required="required" style="height:80px;">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <h6>Date Found</h6>
-                    <input type="text" id="dateFound" class="form-control" name="dateFound" required="required">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <h6>Location Found</h6>
-                    <input id="locationFound" type="password" class="form-control" name="locationFound" required="required">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <h6>Location Returned</h6>
-                    <input id="cpsw" type="password" class="form-control" name="locationReturned">
-                  </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Post Item</button>
-
                 <form id="modalForm">
                           <div class="modal-body">
                             <div class="form-group">
@@ -196,7 +130,6 @@
                           <button type="button" id="post_item_button" class="btn btn-primary" data-dismiss="modal" onclick="addCard()" disabled="True">Post Item</button>
                 </form>
 
-
               </div>
             </div>
           </div>
@@ -206,5 +139,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script type="text/javascript" src="../addItemCard.js"></script>
       </body>
     </html>
