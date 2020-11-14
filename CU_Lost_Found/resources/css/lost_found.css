@@ -5,19 +5,16 @@
 
 }
 .jumbotron{
-    height:36em;
+    height:35em;
 }
 .jumbotron .lost{
-    text-align:left;
-    padding:2em;
-    width:40%;
+    padding:20px;
+    width:50%;
     border-right:1px solid rgba(0,0,0,.1);
 } 
 .jumbotron .found{
-    text-align:left;
-    padding:2em;
-    width:40%;
-    border-left:1px solid rgba(0,0,0,.1);
+    padding:20px;
+    width:50%;
 }
 .container-fluid{
     width:100%;
@@ -35,4 +32,12 @@
 
   .input-group.md-form.form-sm.form-2 input.black-border {
     border: 1px solid black;
+  }
+
+  h6 {
+    display:inline;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
