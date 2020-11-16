@@ -1,3 +1,18 @@
+var http = require('http');
+
+//create a server object:
+http.createServer(function  (req, res) {
+  res.writeHead(200,  {'Content-Type': 'text/html'}); // tells client it is HTML
+  res.write('Hello 3308 World!</br>'); //write a response to the client
+  res.write('Hello 3308 World!</br>'); //write a response to the client
+  res.write(req.url);
+  res.end(); //end the response
+
+}).listen(8000); //the server object listens on port 8080
+
+console.log('Server running at http://127.0.0.1:8000');
+
+
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
@@ -9,11 +24,11 @@ var pgp = require('pg-promise')();
 
 //Make sure to change this section depending on what your local database connection settings are (should be different for everyone's local machine)
 const dbConfig = {
-	host: '127.0.0.1',
-	port: 3306,
-	database: 'my_db',
+	host: 'localhost',
+	port: 5432,
+	database: 'mydb',
 	user: 'root',
-	password: 'root'
+	password: 'HeRm10n3124?!'
 };
 
 var db = pgp(dbConfig);
