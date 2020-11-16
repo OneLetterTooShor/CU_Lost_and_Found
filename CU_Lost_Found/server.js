@@ -20,27 +20,35 @@ app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 //Create Database Connection
-var pgp = require('pg-promise')();
+var mysql = require('mysql');
 
 //Make sure to change this section depending on what your local database connection settings are (should be different for everyone's local machine)
-const dbConfig = {
-	host: 'localhost',
-	port: 5432,
+var con = mysql.createConnection ({
+	host: '127.0.0.1',
+	//port: 5432,
 	database: 'mydb',
 	user: 'root',
 	password: 'HeRm10n3124?!'
-};
+});
 
-var db = pgp(dbConfig);
+//var db = mysql(dbConfig);
+//var query = 'SELECT * FROM User;'; //query can be anything
+con.connect();
+
+con.query('SELECT Password FROM User WHERE user_id="12345"', function(error, results, fields) {
+	if (error) throw error;
+	//console.log(results);
+	console.log(results[0].Password);
+});
 
 // set the view engine to ejs
-app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
+// app.set('view engine', 'ejs');
+// app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
-// lost_and_found page post found items
-app.get('/', function(req, res) {
-	res.render('lost_and_found',{
-		local_css:"lost_found.css", 
-		my_title:"Lost and Found"
-	});
-});
+// // lost_and_found page post found items
+// app.get('/', function(req, res) {
+// 	res.render('lost_and_found',{
+// 		local_css:"lost_found.css", 
+// 		my_title:"Lost and Found"
+// 	});
+// });
