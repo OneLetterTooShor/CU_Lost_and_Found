@@ -32,6 +32,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User` (
   PRIMARY KEY (`User_ID`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Populating User table with group members
+-- -----------------------------------------------------
+INSERT INTO User (Password, Email, Name, Phone, Admin)
+VALUES ('Password123', 'nifo5819@colorado.edu', 'Nikkii Fox', '970-467-7764', '1'),
+	   ('Password456', 'also2769@colorado.edu', 'Alex Sorensen', '847-636-9298', '1'),
+       ('Password789', 'anse5596@colorado.edu', 'Andrew Settergren', '303-241-8205', '1'),
+       ('Password000', 'iawo6533@colorado.edu', 'Ian Wilson Wong', '720-999-0399', '1'),
+       ('Password111', 'keva6944@colorado.edu', 'Kelsey Valencia', '847-636-9298', '1');
+
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Found_Listing`
