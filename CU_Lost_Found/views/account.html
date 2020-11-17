@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Account Information</title>
+        <link rel="stylesheet" href="../resources/css/main.css">
+        <link rel="stylesheet" href="../resources/css/account.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      </head>
+      <body>
+        <!--This is the section for the navbar. Make sure to include on all html pages.-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+          <a class="navbar-brand" href="index.html">
+            <img class="rounded-circle" src="../resources/images/favicon.ico" alt="" width="30" height="30">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Lost & Found</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about">About Us</a>
+              </li>
+            </ul>
+          <div class="form-inline my-2 my-lg-0" style="margin-right:8px;">
+          <a href="login">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" style="">Login</button>
+          </a>
+          </div>
+          <div class="form-inline my-2 my-lg-0">
+          <a href="account">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Account</button>
+          </a>
+          </div>
+          </div>
+        </nav>
+        <!--End Navbar section-->
+
+      <div class="body_content">
+        <div class="jumbotron">
+          <h1 class="display-4"><center>Account Information</h1></center>
+          <hr class="my-5">
+          <p> Name: John Doe </p> <br>
+          <p> Student ID: 123456789 </p> <br>
+          <p> E-mail: john.doe@colorado.edu </p> <br>
+          <p> Phone number: 303-123-4567 </p> <br>
+          <a class="btn btn-primary btn-sm" href="#searchBox" role="button" style="background-color:#BC8E48; border-color:#BC8E48;">Edit information</a>
+        </div>
+
+        <div class="container-fluid">
+          <div class="active float-left">
+            <h1 class="display-4"> <center>Active listings</h1></center>
+          </div>
+          <div class="past float-right">
+            <h1 class="display-4"> <center>Past listings</h2></center>
+          </div>
+        </div>
+
+        </div>
+        <div class="footer">
+          <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script type="text/javascript" src="../addItemCard.js"></script>
+      </body>
+    </html>

@@ -80,7 +80,7 @@ app.get('/login', function(req, res) {
 });
 
 //Render Account page
-app.get('/about', function(req, res) {
+app.get('/account', function(req, res) {
 	res.sendFile( __dirname + "/" + "views/account.html" ); //needs linked
 });
 
