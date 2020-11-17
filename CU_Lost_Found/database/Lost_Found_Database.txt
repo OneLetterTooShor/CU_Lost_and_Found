@@ -18,8 +18,9 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`User` DROP TABLE IF EXISTS `mydb`.`User` ;
+-- Table `mydb`.`User` 
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`User` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`User` (
   `User_ID` INT NOT NULL AUTO_INCREMENT,
