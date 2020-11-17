@@ -81,7 +81,7 @@ app.get('/login', function(req, res) {
 
 //Render Account page
 app.get('/account', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/account.html" ); //needs linked
+	res.sendFile( __dirname + "/" + "views/account.html" );
 });
 
 //Post listed item to database
@@ -90,12 +90,23 @@ app.post('/post_item', function(req, res) {
 		var itemDescription = req.body.itemDescription;
 		var dateFound = req.body.dateFound;
 		var locFound = req.body.locationFound;
+		var dateReturned = req.body.dateReturned;
 		var locReturned = req.body.locationReturned;
 		var datePosted = new Date();
+		var month = datePosted.getMonth();
+		var day = datePosted.getDate();
+		var year = datePosted.getFullYear();
+		var hour = datePosted.getHours();
+		var minute = datePosted.getMinutes();
+		var ampm = (hour >= 12) ? "PM" : "AM";
+		if(hour > 12) {
+			hour = hour - 12;
+		}
+		var date = month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm;
 		//var imgLink
 
-		var insert_statement = "INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Location_Returned, Date_Posted) VALUES('1', '" + itemName + "','" +
-		itemDescription + "','" + dateFound +"','" + locFound + "', '" + locReturned + "', '" + datePosted + "');";
+		var insert_statement = "INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted) VALUES('1', '" + itemName + "','" +
+		itemDescription + "','" + dateFound + "','" + locFound + "', '" + dateReturned + "', '" + locReturned + "', '" + date + "');";
 		
 		connection.query(insert_statement, function(err, result) {
 			if(err) {
