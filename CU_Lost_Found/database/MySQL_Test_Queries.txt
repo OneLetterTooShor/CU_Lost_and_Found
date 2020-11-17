@@ -1,6 +1,6 @@
 ﻿-- -----------------------------------------------------
 -- No User_ID needed, auto-increment starting at 1
---This data is already loaded when the tables are created, running it again will result in --duplicate entries. Testing purposes only.
+-- This data is already loaded when the tables are created, running it again will result in duplicate entries. Testing purposes only.
 -- -----------------------------------------------------
 INSERT INTO User (Password, Email, Name, Phone, Admin)
 VALUES ('Password123', 'nifo5819@colorado.edu', 'Nikkii Fox', '970-467-7764', '1'),
@@ -11,7 +11,7 @@ VALUES ('Password123', 'nifo5819@colorado.edu', 'Nikkii Fox', '970-467-7764', '1
        
 -- -----------------------------------------------------
 -- No Listing_ID needed, auto-increment starting at 1
---Testing purposes only.
+-- Testing purposes only.
 -- -----------------------------------------------------
 INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted)
 VALUES('1', 'Hydroflask', 'Pink, moon sticker on side', '11/13/2020', 'C4C', '11/13/2020', 'C4C Reception', '11/13/2020'),
@@ -23,7 +23,7 @@ VALUES('1', 'Hydroflask', 'Pink, moon sticker on side', '11/13/2020', 'C4C', '11
 
 -- -----------------------------------------------------
 -- Query for pulling all users and their posted items
---Testing purposes only.
+-- Testing purposes only.
 -- -----------------------------------------------------
 SELECT Name, User.User_ID, Listing_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted
 FROM User, Found_Listing
