@@ -1,10 +1,11 @@
 /////MODULES//////
 var http = require('http');
 var express = require('express'); //Ensure our express framework has been added
-var app = new express();
+var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
 app.use(bodyParser.json());              // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
+app.use(bodyParser.text());
 //////////////////
 
 
@@ -21,9 +22,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // console.log('Server running at http://127.0.0.1:8080');
 //////////////////
 //^This code was not working with our html pages. I think that the above it just a basic example that Asa showed us
-//for very basic outputs, but something else is needed to fully render existing HTML pages - NF
+//for very basic outputs, but something else (the below line) is needed to fully render existing HTML pages - NF
 
-app.set('port', process.env.PORT || 8080); //Need this to start listening on port 8080
+app.set('port', process.env.PORT || 8000); //Need this to start listening on port 8080
+//Can change the port number depending on your local machine
 
 
 //Create Database Connection:
@@ -32,8 +34,7 @@ app.set('port', process.env.PORT || 8080); //Need this to start listening on por
 var mysql = require('mysql'); //Ensure our MySQL node has been added
 var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
-	//port: 5432, //port not needed for MySQL connection (used for PostgreSQL connection)
-	database: 'mydb',
+	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
 	password: 'HeRm10n3124?!'
 });
@@ -48,14 +49,15 @@ connection.connect(function(err) { //now connect to MySQL database
 
 /////TEST QUERY//////
 //var query = 'SELECT * FROM User;'; //query can be anything
-connection.query('SELECT Password FROM User WHERE user_id="12345"', function(error, results, fields) {
-	if (error) {
-		throw error;
-	}
+// connection.query('SELECT Password FROM User WHERE user_id="12345"', function(error, results, fields) {
+// 	if (error) {
+// 		throw error;
+// 	}
 
-	console.log(results[0].Password);
-});
+// 	console.log(results[0].Password);
+// });
 //////////////////
+
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -64,7 +66,7 @@ app.use(express.static(__dirname + '/'));
 
 //Render Lost & Found home page
 app.get('/', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/Lost_and_Found.html" );
+	res.sendFile( __dirname + "/" + "views/Lost_and_Found.html");
 });
 
 //Render About Us page
@@ -72,24 +74,53 @@ app.get('/about', function(req, res) {
 	res.sendFile( __dirname + "/" + "views/about.html" );
 });
 
-//Render About Us page
+//Render Login page
 app.get('/login', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/login.html" );
+	res.sendFile( __dirname + "/" + "views/login.html" ); //needs linked
 });
 
-//Render About Us page
+//Render Account page
 app.get('/about', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/about.html" );
+	res.sendFile( __dirname + "/" + "views/account.html" ); //needs linked
 });
 
-// // lost_and_found page post found items
-// app.get('/', function(req, res) {
-// 	res.render('lost_and_found',{
-// 		local_css:"lost_found.css", 
-// 		my_title:"Lost and Found"
+//Post listed item to database
+app.post('/post_item', function(req, res) {
+		var itemName = req.body.itemName;
+		var itemDescription = req.body.itemDescription;
+		var dateFound = req.body.dateFound;
+		var locFound = req.body.locationFound;
+		var locReturned = req.body.locationReturned;
+		var datePosted = new Date();
+		//var imgLink
+
+		var insert_statement = "INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Location_Returned, Date_Posted) VALUES('1', '" + itemName + "','" +
+		itemDescription + "','" + dateFound +"','" + locFound + "', '" + locReturned + "', '" + datePosted + "');";
+		
+		connection.query(insert_statement, function(err, result) {
+			if(err) {
+				throw err;
+			}
+			console.log("1 record inserted");
+		});
+		//STATUS: Sends data to database OK. But page starts loading after you hit submit.
+		//Also need to populate the cards on the HTML page with data from the DB
+		//res.sendFile( __dirname + "/" + "views/Lost_and_Found.html");
+});
+
+//Get listings from database to populate cards on HTML page
+// app.get('/post_item', function(req, res) {
+// 	var select_statement = "SELECT * FROM Found_Listing;"
+
+// 	connection.query(select_statement, function(err, data) {
+// 		if(err) {
+// 			throw err;
+// 		}
+// 	res.render('/post_item', {userData:data});
 // 	});
 // });
 
-app.listen(8080, function () {
-    console.log('Server is running.. on Port 8080');
+
+app.listen(8000, function () {
+    console.log('Server is running.. on Port 8000');
 }); //Keep listening on port 8080

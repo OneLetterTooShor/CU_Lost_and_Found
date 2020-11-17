@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       </head>
       <body>
-        <form action = "http://127.0.0.1:8080/process_get" method = "GET">
         <!--This is the section for the navbar. Make sure to include on all html pages.-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-black">
           <a class="navbar-brand" href="https://www.colorado.edu/" target="_blank">
@@ -54,7 +53,7 @@
           <div class="found float-right">
             <p><center>Start here if you would like to post a<br>listing for a found item.</center></p>
             <p class="lead"><center>
-              <a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" data-toggle="modal" data-target="#found_items_popout" onclick="resetModal(); openModal();">Post Found Items</a>
+              <a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" data-toggle="modal" data-target="#found_items_popout" onclick="resetModal();">Post Found Items</a>
             </center></p>
           </div>
         </div>
@@ -66,12 +65,13 @@
               <button class="btn btn-outline-secondary" type="button">Search</button>
             </div>
           </div>
+          <form action="/post_item" method="GET">
           <div class="card-columns" id="cardPlaceholder" style="column-count: 1;">
             <!-- maybe have just 1 column of wide cards with each card split (left title and pic and right side rest?)
             will be hard to input my 3s -->
 
-
           </div>
+          </form>
             <p style="padding-top:2em;">Disclaimer: All items retrieved by students are kept on record. If you have lost an item and feel that it has been wrongfully claimed,
             please follow the appeal process <a href="#">here</a>.
           </p>
@@ -93,7 +93,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-                <form id="modalForm">
+                <form id="modalForm" action = "/post_item" method = "POST">
                           <div class="modal-body">
                             <p style="font-size:13px; color:red">*Required field</p>
                             <div class="form-group">
@@ -125,20 +125,22 @@
                             <br>
                             <h6>Upload photo(s):</h6>
                             <p style="font-size:13px;"><i>To select multiple files, hold down the CTRL or SHIFT key while selecting</i></p>
-                              <form action="/action_page.php"> <!-- https://www.w3schools.com/howto/howto_html_file_upload_button.asp -->
+                              <form> <!-- https://www.w3schools.com/howto/howto_html_file_upload_button.asp -->
                                   <input type="file" id="imageFile" name="filename" multiple>
                               </form>
                             </div>
                         </div>
+                        <br>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" id="post_item_button" class="btn btn-primary" onclick="addCard()">Post Item</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
+                          <input type="submit" form="modalForm" name="post_item_button" value = "Post Item" class="btn btn-primary" onclick="addCard()"></input>
+                        </div>
                 </form>
-
               </div>
             </div>
           </div>
         </div>
+
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
