@@ -1,0 +1,48 @@
+﻿-- -----------------------------------------------------
+-- No User_ID needed, auto-increment starting at 1
+-- This data is already loaded when the tables are created, running it again will result in duplicate entries. Testing purposes only.
+-- -----------------------------------------------------
+INSERT INTO User (Password, Email, Name, Phone, Admin)
+VALUES ('Password123', 'nifo5819@colorado.edu', 'Nikkii Fox', '970-467-7764', '1'),
+           ('Password456', 'also2769@colorado.edu', 'Alex Sorensen', '847-636-9298', '1'),
+       ('Password789', 'anse5596@colorado.edu', 'Andrew Settergren', '303-241-8205', '1'),
+       ('Password000', 'iawo6533@colorado.edu', 'Ian Wilson Wong', '720-999-0399', '1'),
+       ('Password111', 'keva6944@colorado.edu', 'Kelsey Valencia', '847-636-9298', '1');
+       
+       
+-- -----------------------------------------------------
+-- No Listing_ID needed, auto-increment starting at 1
+-- Testing purposes only.
+-- -----------------------------------------------------
+INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted)
+VALUES('1', 'Hydroflask', 'Pink, moon sticker on side', '11/13/2020', 'C4C', '11/13/2020', 'C4C Reception', '11/13/2020'),
+          ('2', 'Macbook', 'Black case with engineering stickers', '11/14/2020', 'Engineering computer lab', '11/14/2020', 'Engineering Reception', '11/15/2020'),
+      ('3', 'Airpods', 'Blue keychain case', '11/15/2020', 'Norlin 3rd floor', '11/16/2020', 'Norlin Reception', '11/15/2020'),
+      ('4', 'Laptop charger', 'Looks like an Apple charger, it was still plugged into the wall', '11/16/2020', 'C4C', '11/16/2020', 'C4C Reception', '11/17/2020'),
+      ('5', 'iPhone', 'Cracked screen, pink marble case', '11/17/2020', 'Duane bathroom', '11/17/2020', 'C4C Reception', '11/17/2020');
+
+
+-- -----------------------------------------------------
+-- Query for pulling all users and their posted items
+-- Testing purposes only.
+-- -----------------------------------------------------
+SELECT Name, User.User_ID, Listing_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted
+FROM User, Found_Listing
+WHERE Found_Listing.User_ID = User.User_ID;
+
+
+-- -----------------------------------------------------
+-- Query for pulling all listings containing a word in the Type or Description
+--Testing purposes only.
+-- -----------------------------------------------------
+SELECT * FROM Found_Listing
+WHERE Type LIKE '%hydroflask%' OR Item_Description LIKE '%hydroflask%';
+
+
+-- -----------------------------------------------------
+-- Query for pulling all listings found on a certain date (change to whatever the search is)
+--Testing purposes only.
+-- -----------------------------------------------------
+SELECT * FROM Found_Listing
+WHERE Date_Found = '11/13/2020';
+
