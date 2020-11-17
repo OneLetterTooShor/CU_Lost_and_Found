@@ -98,8 +98,9 @@ app.post('/post_item', function(req, res) {
 		var year = datePosted.getFullYear();
 		var hour = datePosted.getHours();
 		var minute = datePosted.getMinutes();
-		var ampm = (hour >= 12) ? "PM" : "AM";
+		var ampm = "AM";
 		if(hour > 12) {
+			ampm = "PM"
 			hour = hour - 12;
 		}
 		var date = month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm;
