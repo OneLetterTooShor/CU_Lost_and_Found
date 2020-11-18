@@ -1,0 +1,32 @@
+.body_content{
+    padding-top:2em;
+    margin-left:20%;
+    margin-right:20%;
+  }
+  .jumbotron{
+      height:35em;
+  }
+  .container-fluid{
+      height: 23em;
+      width:100%;
+      margin-left:0;
+      margin-right:0;
+      background-color:#e9ecef;
+      padding-top:2em;
+      padding-bottom:2em;
+  }
+  .active{
+    padding:20px;
+    width:50%;
+    border-right:1px solid rgba(0,0,0,.1);
+  }
+  .past{
+    padding:20px;
+    width:50%;
+  }
+    h6 {
+        display:inline;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
