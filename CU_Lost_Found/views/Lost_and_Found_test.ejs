@@ -69,7 +69,28 @@
           <div class="card-columns" id="cardPlaceholder" style="column-count: 1;">
             <!-- maybe have just 1 column of wide cards with each card split (left title and pic and right side rest?)
             will be hard to input my 3s -->
-
+            
+            <% if(db_data.length){ for(var i = 0;i < db_data.length;i++) { %>
+            <div class="card" id="item<%=(i+1)%>"> 
+                <div class="row no-gutters">
+                <div class="col-md-6">
+                <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+                </div>
+                <div class="col-md-6">
+                <br>
+                <h5 class="card-title"> <%= db_data[i].Type%> </h5>
+                <p class="card-text">Desciption:  <%= db_data[i].Item_Description%> </p>
+                <p class="card-text">Date Found:  <%= db_data[i].Date_Found%> </p>
+                <p class="card-text">Location Found: <%= db_data[i].Location_Found%> </p>
+                <p class="card-text">Location Returned:  <%= db_data[i].Location_Returned%> </p>
+                <p class="card-text"><small class="text-muted">Posted  <%= db_data[i].Date_Posted%> </small></p>
+                </div>
+                </div>
+                <br>
+                </div>
+                <% } %>
+                <% }; %>
+                
           </div>
           </form>
             <p style="padding-top:2em;">Disclaimer: All items retrieved by students are kept on record. If you have lost an item and feel that it has been wrongfully claimed,

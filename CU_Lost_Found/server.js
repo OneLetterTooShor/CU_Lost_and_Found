@@ -36,7 +36,7 @@ var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'HeRm10n3124?!'
+	password: 'root'
 });
 
 connection.connect(function(err) { //now connect to MySQL database
@@ -66,7 +66,22 @@ app.use(express.static(__dirname + '/'));
 
 //Render Lost & Found home page
 app.get('/', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/Lost_and_Found.html");
+	var select_statement = "SELECT * FROM Found_Listing;"
+	//var data = {
+
+	//}
+	//console.log(select_statement);
+	
+ 	connection.query(select_statement, function(err, data) {
+ 		if(err) {
+ 			throw err;
+ 		}
+	 //res.render('/post_item', {db_data:data});
+	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+	 //console.log(data[1].Type);
+	 });
+	//res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+
 });
 
 //Render About Us page
@@ -83,6 +98,14 @@ app.get('/login', function(req, res) {
 app.get('/account', function(req, res) {
 	res.sendFile( __dirname + "/" + "views/account.html" );
 });
+
+//Render Account page
+//app.get('/lost_and_found', function(req, res) {
+	// database call to get L&F items
+	// with those results, lets render our L&F page to build the cards via ejs
+	// res.render will do that and send back the html
+	//res.sendFile( __dirname + "/" + "views/Lost_and_Found_test.ejs" );
+//});
 
 //Post listed item to database
 app.post('/post_item', function(req, res) {
@@ -118,19 +141,27 @@ app.post('/post_item', function(req, res) {
 		//STATUS: Sends data to database OK. But page starts loading after you hit submit.
 		//Also need to populate the cards on the HTML page with data from the DB
 		//res.sendFile( __dirname + "/" + "views/Lost_and_Found.html");
+		res.redirect('/'); //use with app.get('/lostandfound') from above
 });
 
 //Get listings from database to populate cards on HTML page
-// app.get('/post_item', function(req, res) {
-// 	var select_statement = "SELECT * FROM Found_Listing;"
+/*
+app.get('/post_item', function(req, res) {
+	var select_statement = "SELECT * FROM Found_Listing;"
+	//var data = {
 
-// 	connection.query(select_statement, function(err, data) {
-// 		if(err) {
-// 			throw err;
-// 		}
-// 	res.render('/post_item', {userData:data});
-// 	});
-// });
+	//}
+	//console.log(select_statement);
+	
+ 	connection.query(select_statement, function(err, data) {
+ 		if(err) {
+ 			throw err;
+ 		}
+ 	res.render('/post_item', {db_data:data});
+	 });
+	 
+});
+*/
 
 
 app.listen(8000, function () {
