@@ -8,7 +8,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       </head>
       <body>
-        <!--This is the section for the navbar. Make sure to include on all html pages.-->
+         <!--This is the section for the navbar. Make sure to include on all html pages.
+
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-black">
           <a class="navbar-brand" href="https://www.colorado.edu/" target="_blank">
             <img class="rounded-circle" src="../resources/images/favicon.ico" alt="" width="30" height="30">
@@ -21,24 +23,23 @@
               <li class="nav-item">
                 <a class="nav-link" href="/">Lost & Found</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="about">About Us</a>
               </li>
             </ul>
           <div class="form-inline my-2 my-lg-0" style="margin-right:8px;">
-          <a href="login">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Login</button>
-          </a>
+            <a href="login">
+              <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Login</button>
+            </a>
           </div>
           <div class="form-inline my-2 my-lg-0">
-          <a href="account">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Account</button>
-          </a>
+            <a href="account">
+              <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Account</button>
+            </a>
           </div>
           </div>
         </nav>
         <!--End Navbar section-->
-
       <div class="body_content">
         <div class="jumbotron">
           <h1 class="display-4"><center>Lost and Found Account Login</h1></center>
@@ -65,12 +66,22 @@
 					<div class="avatar">
 						<img src="../resources/images/favicon.ico" alt="registerLogo">
 					</div>
-					<h4 class="modal-title">Sign Up page</h4>
+					<h4 class="modal-title">Register for a New Account</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<input type="text" class="form-control" name="registerEmail" placeholder="Email"
+						<input id="emailInput" type="text" class="form-control" name="registerEmail" placeholder="Colorado Email (ex. josm1234@colorado.edu)"
+              required="required">
+              <p id="emailInputHelp" style="font-size:13px; color:red">Please Enter a Valid Email!</p>
+          </div>
+          
+          <div class="form-group">
+						<input type="text" class="form-control" name="registerName" placeholder="Full Name (ex. John Smith)"
+							required="required">
+          </div>
+          <div class="form-group">
+						<input type="text" class="form-control" name="registerPhone" placeholder="Phone Number (ex. 1234567890)"
 							required="required">
 					</div>
 					<div class="form-group">
@@ -88,7 +99,7 @@
 				</div>
 				<div class="modal-footer">
 					<div id="message" style="display:block">
-						<h3>Password must contain the following:</h3>
+						<h5>Password must contain the following:</h5>
 						<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
 						<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
 						<p id="number" class="invalid">A <b>number</b></p>

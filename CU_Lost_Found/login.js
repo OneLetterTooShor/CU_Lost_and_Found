@@ -1,4 +1,5 @@
 function openModal() {
+    var myEmailInput = document.getElementById("emailInput");
     var myInput = document.getElementById("psw");
     var confirmMyInput = document.getElementById("cpsw");
 	var letter = document.getElementById("letter");
@@ -7,6 +8,26 @@ function openModal() {
 	var length = document.getElementById("length");    
     var match = document.getElementById("match");
 
+    var substring = "@colorado.edu";
+
+    //when user is entering email
+    myEmailInput.onkeyup = function() {
+        console.log(myEmailInput.value);
+
+        console.log(myEmailInput.value.includes(substring));
+
+        if (myEmailInput.value.includes(substring) && myEmailInput.value.length == 21)
+        {
+            document.getElementById("emailInputHelp").innerHTML = "Valid Email!";
+            document.getElementById("emailInputHelp").style.color = "green";
+        }
+
+        if (myEmailInput.value.includes(substring) == false && myEmailInput.value.length != 21)
+        {
+            document.getElementById("emailInputHelp").innerHTML = "Please Enter a Valid Email!";
+            document.getElementById("emailInputHelp").style.color = "red";
+        }
+    }
 
 	// When the user starts to type something inside the password field
 	myInput.onkeyup = function() {
