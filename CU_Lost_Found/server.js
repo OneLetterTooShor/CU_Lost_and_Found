@@ -36,7 +36,7 @@ var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'root'
+	password: 'HeRm10n3124?!'
 });
 
 connection.connect(function(err) { //now connect to MySQL database
@@ -64,9 +64,15 @@ app.set('view engine', 'ejs');
 //use relative paths and access our resources directory (for the GETS and POSTS)
 app.use(express.static(__dirname + '/'));
 
-//Render Lost & Found home page
+
+//Render Login page (this is the first page users see, they must login before gaining access to the site)
 app.get('/', function(req, res) {
-	var select_statement = "SELECT * FROM Found_Listing;"
+	res.sendFile( __dirname + "/" + "views/login.html" );
+});
+
+//Render Lost & Found home page
+app.get('/home', function(req, res) {
+	var select_statement = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID ORDER BY Listing_ID;"
 	//var data = {
 
 	//}
@@ -76,36 +82,54 @@ app.get('/', function(req, res) {
  		if(err) {
  			throw err;
  		}
-	 //res.render('/post_item', {db_data:data});
 	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
 	 //console.log(data[1].Type);
 	 });
-	//res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+});
+
+app.post('/home', function(req, res) {
+	
+	//placeholder function, currently just redirects to home page
+	//still need to add user validation
+	res.redirect('/home');
 
 });
 
 //Render About Us page
 app.get('/about', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/about.html" );
-});
-
-//Render Login page
-app.get('/login', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/login.html" ); //needs linked
+	var select_statement = "SELECT Name from User;"
+	
+ 	connection.query(select_statement, function(err, data) {
+ 		if(err) {
+ 			throw err;
+ 		}
+	 res.render( __dirname + "/" + "views/about", {db_data:data});
+	});
 });
 
 //Render Account page
 app.get('/account', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/account.html" );
+	var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='1' AND Found_Listing.User_ID='1' ORDER BY Listing_ID;"
+	var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='0' AND Found_Listing.User_ID='1' ORDER BY Listing_ID;"
+
+ 	connection.query(select_active, function(err, data) {
+		connection.query(select_inactive, function(err2, data2) {
+			if(err) {
+				throw err;
+			}
+			if(err2) {
+				throw err;
+			}
+
+			res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2}); //render this page with the results of the query as the parameter
+		});
+	});
 });
 
-//Render Account page
-//app.get('/lost_and_found', function(req, res) {
-	// database call to get L&F items
-	// with those results, lets render our L&F page to build the cards via ejs
-	// res.render will do that and send back the html
-	//res.sendFile( __dirname + "/" + "views/Lost_and_Found_test.ejs" );
-//});
+app.post('/edit_item', function(req, res) {
+
+
+});
 
 //Post listed item to database
 app.post('/post_item', function(req, res) {
@@ -121,10 +145,16 @@ app.post('/post_item', function(req, res) {
 		var year = datePosted.getFullYear();
 		var hour = datePosted.getHours();
 		var minute = datePosted.getMinutes();
-		var ampm = "AM";
+		var ampm = "AM MST";
 		if(hour > 12) {
-			ampm = "PM"
+			ampm = "PM MST"
 			hour = hour - 12;
+		}
+		else if(hour == 12) {
+			ampm = "PM MST";
+		}
+		if(minute < 10) {
+			minute = "0" + minute;
 		}
 		var date = month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm;
 		//var imgLink
@@ -138,30 +168,12 @@ app.post('/post_item', function(req, res) {
 			}
 			console.log("1 record inserted");
 		});
-		//STATUS: Sends data to database OK. But page starts loading after you hit submit.
-		//Also need to populate the cards on the HTML page with data from the DB
-		//res.sendFile( __dirname + "/" + "views/Lost_and_Found.html");
-		res.redirect('/'); //use with app.get('/lostandfound') from above
+
+		res.redirect('/home'); //redirects to app.get('/home' and reloads the page with the new data)
 });
 
-//Get listings from database to populate cards on HTML page
-/*
-app.get('/post_item', function(req, res) {
-	var select_statement = "SELECT * FROM Found_Listing;"
-	//var data = {
 
-	//}
-	//console.log(select_statement);
-	
- 	connection.query(select_statement, function(err, data) {
- 		if(err) {
- 			throw err;
- 		}
- 	res.render('/post_item', {db_data:data});
-	 });
-	 
-});
-*/
+
 
 
 app.listen(8000, function () {
