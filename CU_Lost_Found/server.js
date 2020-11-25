@@ -37,7 +37,7 @@ var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'root'
+	password: 'HeRm10n3124?!'
 });
 
 connection.connect(function(err) { //now connect to MySQL database
@@ -182,9 +182,174 @@ app.get('/account', function(req, res) {
 	});
 });
 
-app.post('/edit_item', function(req, res) {
+app.post('/edit_type', function(req, res) {
+	var listingID = req.body.listingID_Type;
+	var newItemName = req.body.itemName;
 
+	console.log(listingID, newItemName);
 
+	var select_listing = "UPDATE Found_Listing SET Type='" + newItemName + "' WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/edit_description', function(req, res) {
+	var listingID = req.body.listingID_Desc;
+	var newItemDesc = req.body.itemDesc;
+
+	console.log(listingID, newItemDesc);
+
+	var select_listing = "UPDATE Found_Listing SET Item_Description ='" + newItemDesc + "' WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/edit_date_found', function(req, res) {
+	var listingID = req.body.listingID_DateFound;
+	var newItemDateFound = req.body.dateFound;
+
+	console.log(listingID, newItemDateFound);
+
+	var select_listing = "UPDATE Found_Listing SET Date_Found ='" + newItemDateFound + "' WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/edit_location_found', function(req, res) {
+	var listingID = req.body.listingID_LocFound;
+	var newItemLocFound = req.body.locFound;
+
+	console.log(listingID, newItemLocFound);
+
+	var select_listing = "UPDATE Found_Listing SET Location_Found ='" + newItemLocFound + "' WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/edit_date_returned', function(req, res) {
+	var listingID = req.body.listingID_DateRet;
+	var newDateReturned = req.body.dateReturned;
+
+	console.log(listingID, newDateReturned);
+
+	var select_listing = "UPDATE Found_Listing SET Date_Returned ='" + newDateReturned + "' WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/edit_location_returned', function(req, res) {
+	var listingID = req.body.listingID_LocRet;
+	var newLocRet = req.body.locationReturned;
+
+	console.log(listingID, newLocRet);
+
+	var select_listing = "UPDATE Found_Listing SET Location_Returned ='" + newLocRet + "' WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/item_claimed', function(req, res) {
+	var listingID = req.body.inactiveItem;
+
+	console.log(listingID);
+
+	var select_listing = "UPDATE Found_Listing SET Active ='0' WHERE Listing_ID='" + listingID + "';"
+	var addToClaimedItems = "INSERT INTO Closed_Item(Listing_ID, Claimant_ID) VALUES('" + listingID + "', '123');"
+
+	connection.query(select_listing, function(err, result) {
+		if(err) {
+			throw err;
+		}
+	});
+
+	connection.query(addToClaimedItems, function(err, result) {
+		if(err) {
+			throw err;
+		}
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/restore_item', function(req, res) {
+	var listingID = req.body.restoreItem;
+
+	console.log(listingID);
+
+	var restoreThis = "UPDATE Found_Listing SET Active ='1' WHERE Listing_ID='" + listingID + "';"
+	var removeClaimedStatus = "DELETE FROM Closed_Item WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(restoreThis, function(err, result) {
+		if(err) {
+			throw err;
+		}
+	});
+
+	connection.query(removeClaimedStatus, function(err, result) {
+		if(err) {
+			throw err;
+		}
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/delete_item', function(req, res) {
+	var listingID = req.body.deleteItem;
+
+	console.log(listingID);
+
+	var select_listing = "DELETE FROM Found_Listing WHERE Listing_ID='" + listingID + "';"
+
+	connection.query(select_listing, function(err, result) {
+		if(err) {
+			throw err;
+		}
+	});
+
+	res.redirect('/account');
 });
 
 //Post listed item to database
