@@ -102,3 +102,8 @@ function enableButton(letter, capital, number, length, match)
         button.disabled = true;
     } 
 }    
+
+function alertMe()
+{
+    alert("test");
+}

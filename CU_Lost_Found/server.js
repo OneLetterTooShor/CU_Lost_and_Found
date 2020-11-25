@@ -3,11 +3,11 @@ var http = require('http');
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
+let alert = require('alert');
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use(bodyParser.text());
 //////////////////
-
 
 //Create a server object:
 // http.createServer(function  (req, res) {
@@ -32,11 +32,12 @@ app.set('port', process.env.PORT || 8000); //Need this to start listening on por
 //Make sure to change this section depending on what your local database 
 //connection settings are (database, user, password will be different for everyone's local machine)
 var mysql = require('mysql'); //Ensure our MySQL node has been added
+const { equal, notDeepEqual } = require('assert');
 var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'HeRm10n3124?!'
+	password: 'root'
 });
 
 connection.connect(function(err) { //now connect to MySQL database
@@ -89,9 +90,64 @@ app.get('/home', function(req, res) {
 
 app.post('/home', function(req, res) {
 	
-	//placeholder function, currently just redirects to home page
-	//still need to add user validation
-	res.redirect('/home');
+	var email = req.body.emailLoginInput;
+	var password = req.body.passwordLoginInput;
+
+	// loop through all User table [Email] and see if equal to var
+	// 	if it is, check corresponding password
+	// 		if those equal, redirect to home
+	// 	if not equal, invalid alert
+
+	var query = "SELECT Email, Password FROM User WHERE Email='" + email + "' AND Password='" + password + "';";
+
+	connection.query(query, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		if(data.length == 0)
+		{
+			alert("Invalid Credentials! Please try again.");
+			res.redirect('/');
+		}
+		else
+		{
+			res.redirect('/home');
+		}
+   });
+
+});
+
+app.post('/register', function(req, res){
+	var email = req.body.registerEmail;
+	var name = req.body.registerName;
+	var phone = req.body.registerPhone;
+	var pass = req.body.registerPassword;
+
+	var uniqueEmail = "SELECT Email FROM User WHERE Email='" + email + "';";
+	connection.query(uniqueEmail, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		if(data.length == 0)
+		{
+			console.log("email unique");	
+			var insertQuery = "INSERT INTO User(Password, Email, Name, Phone, Admin) VALUES('" + pass + "','" + email + "','" + name + "','" + phone + "', '0');";
+
+			connection.query(insertQuery, function(err, result) {
+				if(err) {
+					throw err;
+				}
+				console.log("new user added");
+			});
+			res.redirect('/home');
+		}
+		else
+		{
+			console.log("email not unique - abort");
+			//alert("Email already in use! Please try again.");
+			res.redirect('/');
+		}
+   });
 
 });
 

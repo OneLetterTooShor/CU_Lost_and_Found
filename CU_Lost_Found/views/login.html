@@ -26,11 +26,11 @@
           <form id="loginForm" action="/home" method = "POST"> <!--This accesses the app.post("/home") on server.js-->
             <div class="form-group">
               <label for="emailLoginInput">Email address</label>
-              <input type="email" class="form-control" id="emailLoginInput"placeholder="Enter Email">
+              <input type="email" class="form-control" id="emailLoginInput" name="emailLoginInput" placeholder="Enter Email">
             </div>
             <div class="form-group">
               <label for="passwordLoginInput">Password</label>
-              <input type="password" class="form-control" id="passwordLoginInput" placeholder="Enter Password">
+              <input type="password" class="form-control" id="passwordLoginInput" name="passwordLoginInput" placeholder="Enter Password">
             </div>
             <small id="emailHelp" class="form-text text-muted">
             <medium style="color:red">You must login with a valid account to access this service</medium>
@@ -42,34 +42,46 @@
         </div>
       </div>
 
+    <form id="registerForm" action="/register" method = "POST">
       <div id="registerModal" class="modal fade">
-		<div class="modal-dialog modal-login">
-			<div class="modal-content">
-				<div class="modal-header">
-					<div class="avatar">
-						<img src="../resources/images/favicon.ico" alt="registerLogo">
-					</div>
-					<h4 class="modal-title">Sign Up page</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<input type="text" class="form-control" name="registerEmail" placeholder="Email"
-							required="required">
-					</div>
-					<div class="form-group">
-						<input id="psw" type="password" class="form-control" name="password" placeholder="Password"
-							required="required">
-					</div>
-					<div class="form-group">
-						<input id="cpsw" type="password" class="form-control" name="confirm password"
-							placeholder="Confirm Password" required="required">
-					</div>
-					<div class="form-group">
-						<button id="my_submit_button" class="btn btn-primary btn-block login-btn"  style="background-color:#BC8E48; border-color:#BC8E48;" disabled
-							>Sign Up</button>
-					</div>
-				</div>
+        <div class="modal-dialog modal-login">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="avatar">
+                <img src="../resources/images/favicon.ico" alt="registerLogo">
+              </div>
+              <h4 class="modal-title">Register for a New Account</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="emailInput" type="text" class="form-control" name="registerEmail" placeholder="Colorado Email (ex. josm1234@colorado.edu)"
+                  required="required">
+                  <p id="emailInputHelp" style="font-size:13px; color:red">Please Enter a Valid Email!</p>
+              </div>
+              
+              <div class="form-group">
+                <input type="text" class="form-control" name="registerName" placeholder="Full Name (ex. John Smith)"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="registerPhone" placeholder="Phone Number (ex. 123-456-7890)"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <input id="psw" type="password" class="form-control" name="registerPassword" placeholder="Password"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <input id="cpsw" type="password" class="form-control" name="registerConfirmPassword"
+                  placeholder="Confirm Password" required="required">
+              </div>
+              <div class="form-group">
+                <button id="my_submit_button" form="registerForm" class="btn btn-primary btn-block login-btn"  style="background-color:#BC8E48; border-color:#BC8E48;" disabled
+                  >Sign Up</button>
+              </div>
+            </div>
+        
 				<div class="modal-footer">
 					<div id="message" style="display:block">
 						<h3>Password must contain the following:</h3>
@@ -82,7 +94,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
+  </div>
+</form>
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
