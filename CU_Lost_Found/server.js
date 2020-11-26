@@ -3,7 +3,7 @@ var http = require('http');
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
-let alert = require('alert');
+//let alert = require('alert');
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use(bodyParser.text());
@@ -68,7 +68,7 @@ app.use(express.static(__dirname + '/'));
 
 //Render Login page (this is the first page users see, they must login before gaining access to the site)
 app.get('/', function(req, res) {
-	res.sendFile( __dirname + "/" + "views/login.html" );
+	res.render( __dirname + "/" + "views/login", {message:''});
 });
 
 //Render Lost & Found home page
@@ -88,7 +88,7 @@ app.get('/home', function(req, res) {
 	 });
 });
 
-app.post('/home', function(req, res) {
+app.post('/', function(req, res) {
 	
 	var email = req.body.emailLoginInput;
 	var password = req.body.passwordLoginInput;
@@ -106,8 +106,8 @@ app.post('/home', function(req, res) {
 		}
 		if(data.length == 0)
 		{
-			alert("Invalid Credentials! Please try again.");
-			res.redirect('/');
+			//alert("Invalid Credentials! Please try again.");
+			res.render(__dirname + "/" + "views/login", {message: 'Invalid Credentials! Please try again.'});
 		}
 		else
 		{
@@ -145,7 +145,7 @@ app.post('/register', function(req, res){
 		{
 			console.log("email not unique - abort");
 			//alert("Email already in use! Please try again.");
-			res.redirect('/');
+			res.render(__dirname + "/" + "views/login", {message: 'Email already in use! Please try again.'});
 		}
    });
 
