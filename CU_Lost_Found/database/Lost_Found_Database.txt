@@ -82,31 +82,12 @@ VALUES('1', 'Hydroflask', 'Pink, moon sticker on side', '11/13/2020', 'C4C', '11
 	  ('2', 'Backpack', 'Yellow', '11/23/2020', 'ATLAS Building', '11/23/2020', 'ATLAS Reception', '11/23/2020 5:31PM MST', '0'),
       ('3', 'HP Laptop', 'Silver with stickers', '11/22/2020', 'Laighing Goat', '11/23/2020', 'Library Help Desk', '11/23/2020 9:58AM MST', '1'),
       ('4', 'Car Keys', 'Pink keychain with 3 silver keys', '11/20/2020', 'Rec Center locker room floor', '11/23/2020', 'Rec Center front desk', '11/23/2020 3:33PM MST', '0'),
-      ('5', 'Wallet', 'Brown, no identity inside', '11/21/2020', 'Fiske lobby', '11/23/2020', 'Fiske help desk', '11/23/2020 7:26PM MST', '1');
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Lost_Listing`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Lost_Listing` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Lost_Listing` (
-  `Listing_ID` INT NOT NULL AUTO_INCREMENT,
-  `User_ID` INT NOT NULL,
-  `Type` VARCHAR(45) NOT NULL,
-  `Color` VARCHAR(45) NOT NULL,
-  `Item_Description` TEXT NOT NULL,
-  `Date_Lost` DATETIME NOT NULL,
-  `Location_Lost` VARCHAR(45) NOT NULL,
-  `Date_Posted` DATETIME NOT NULL,
-  PRIMARY KEY (`Listing_ID`),
-  INDEX `lost_posted_by_idx` (`User_ID` ASC) VISIBLE,
-  CONSTRAINT `lost_posted_by`
-    FOREIGN KEY (`User_ID`)
-    REFERENCES `mydb`.`User` (`User_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+      ('5', 'Wallet', 'Brown, no identity inside', '11/21/2020', 'Fiske lobby', '11/23/2020', 'Fiske help desk', '11/23/2020 7:26PM MST', '1'),
+      ('1', 'Macbook', 'Silver with no case or stickers', '11/24/2020', 'Norlin 1st floor', '11/24/2020', 'Norlin Help Desk', '11/24/2020 3:22PM MST', '1'),
+      ('2', 'Hydroflask', 'White with stickers all over', '11/26/2020', 'C4C Dining Area', '11/26/2020', 'C4C Reception', '11/26/2020 9:01PM MST', '1'),
+      ('3', 'Wallet', 'Black', '11/26/2020', 'WillVill weight room', '11/26/2020', 'WillVill rec center front desk', '11/26/2020 10:15PM MST', '1'),
+      ('4', 'Backpack', 'Black Herschel backpack', '11/27/2020', 'Pekoe dining area', '11/28/2020', 'Pekoe front desk', '11/28/2020 1:05PM MST', '1'),
+      ('5', 'iPad', 'Black with no case', '11/28/2020', 'Rec center locker room', '11/28/2020', 'Rec center front desk', '11/28/2020 8:33PM MST', '1');
 
 
 -- -----------------------------------------------------
