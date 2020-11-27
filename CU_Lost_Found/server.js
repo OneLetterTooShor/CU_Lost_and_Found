@@ -3,11 +3,15 @@ var http = require('http');
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
-//let alert = require('alert');
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use(bodyParser.text());
 //////////////////
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+//use relative paths and access our resources directory (for the GETS and POSTS)
+app.use(express.static(__dirname + '/'));
 
 //Create a server object:
 // http.createServer(function  (req, res) {
@@ -46,24 +50,7 @@ connection.connect(function(err) { //now connect to MySQL database
 	}
 	console.log('Connected to MySQL server.'); //successful
 }); 
-
-
-/////TEST QUERY//////
-//var query = 'SELECT * FROM User;'; //query can be anything
-// connection.query('SELECT Password FROM User WHERE user_id="12345"', function(error, results, fields) {
-// 	if (error) {
-// 		throw error;
-// 	}
-
-// 	console.log(results[0].Password);
-// });
-//////////////////
-
-
-// set the view engine to ejs
-app.set('view engine', 'ejs');
-//use relative paths and access our resources directory (for the GETS and POSTS)
-app.use(express.static(__dirname + '/'));
+////////////////////////
 
 
 //Render Login page (this is the first page users see, they must login before gaining access to the site)
@@ -71,24 +58,7 @@ app.get('/', function(req, res) {
 	res.render( __dirname + "/" + "views/login", {message:''});
 });
 
-//Render Lost & Found home page
-app.get('/home', function(req, res) {
-	var select_statement = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID ORDER BY Listing_ID;"
-	//var data = {
-
-	//}
-	//console.log(select_statement);
-	
- 	connection.query(select_statement, function(err, data) {
- 		if(err) {
- 			throw err;
- 		}
-	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
-	 //console.log(data[1].Type);
-	 });
-});
-
-app.post('/', function(req, res) {
+app.post('/', function(req, res) { //when user logs in, their data is checked against the database 
 	
 	var email = req.body.emailLoginInput;
 	var password = req.body.passwordLoginInput;
@@ -149,6 +119,48 @@ app.post('/register', function(req, res){
 		}
    });
 
+});
+
+//Render Lost & Found home page
+app.get('/home', function(req, res) {
+	var select_statement = "SELECT * FROM Found_Listing ORDER BY Listing_ID;"
+	
+ 	connection.query(select_statement, function(err, data) {
+ 		if(err) {
+ 			throw err;
+ 		}
+	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+	 //console.log(data[1].Type);
+	 });
+});
+
+app.post('/home', function(req, res) {
+	var select_statement = "SELECT * FROM Found_Listing ORDER BY Listing_ID;"
+	
+ 	connection.query(select_statement, function(err, data) {
+ 		if(err) {
+ 			throw err;
+ 		}
+	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+	 //console.log(data[1].Type);
+	 });
+});
+
+//Render search results on Lost & Found page
+app.post('/search', function(req, res) {
+	var searchTerm = req.body.searchBox;
+	console.log(searchTerm);
+
+	var select_statement = "SELECT * FROM Found_Listing WHERE Type LIKE '%" + searchTerm + "%' OR Item_Description LIKE'%" + searchTerm + "%' OR Date_Found LIKE '%" + searchTerm + "%' OR Location_Found LIKE '%" + searchTerm + "%' ORDER BY Listing_ID;"
+
+	
+ 	connection.query(select_statement, function(err, data) {
+ 		if(err) {
+ 			throw err;
+		 }
+	console.log(data);
+	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+	 });
 });
 
 //Render About Us page

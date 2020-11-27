@@ -29,6 +29,16 @@ function validateForm(){
   }
 }
 
+function validateSearch() {
+  var searchTerm = document.getElementById("searchBox");
+
+  if(searchTerm.value == 0) {
+    alert("Search field is required!");
+    return false;
+  }
+  return true;
+}
+
 // var z = 1;
 
 
