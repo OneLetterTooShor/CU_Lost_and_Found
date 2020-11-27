@@ -76,6 +76,7 @@
                                 <p class="card-text">Location Returned:  <%= db_data[i].Location_Returned%> <a href="#" onclick="myFunction(<%= db_data[i].Listing_ID %>)" data-toggle="modal" data-target="#editLocationReturnedModal" style="color:blue; text-decoration: underline; font-size:12px;">Edit</a></p>
                                 <p class="card-text"><small class="text-muted">Posted  <%= db_data[i].Date_Posted%> </small></p>
                                 <br>
+                                <% if(userAdmin == 1) { %>
                                 <h6><b>Has this item been claimed?</b></h6>
                                 <form id="itemClaimedForm" action="/item_claimed" method="POST" style="float:left;">
                                     <input type="checkbox" id="yes" name="activeListing" value="Yes">
@@ -84,6 +85,7 @@
                                     <button type="submit" class="btn btn-primary" form="itemClaimedForm" onclick="myFunction(<%= db_data[i].Listing_ID %>); alertFunc();" style="background-color:#BC8E48; border-color:#BC8E48; float:right;">Submit</button>
                                     <br><br><br><br>
                                 </form>
+                                <% }; %>
                                 <a href="#" onclick="myFunction(<%= db_data[i].Listing_ID %>)" data-toggle="modal" data-target="#deleteItemModal" style="float:right; margin-right:15px;">Delete Listing</a>
                                 </div>
                                 </div>
@@ -111,8 +113,10 @@
                                             <p class="card-text"><small class="text-muted">Posted  <%= db_data2[i].Date_Posted%> </small></p>
                                             <p class="card-text"><small class="text-muted"><b>Claimed!</b></small></p>
                                             <br>
+                                            <% if(userAdmin == 1) { %>
                                             <a href="#" onclick="myFunction(<%= db_data2[i].Listing_ID %>)" data-toggle="modal" data-target="#restoreItemModal" style="float:right; margin-right:15px;">Restore Listing</a>
-                                            </div>
+                                            <% }; %>
+                                          </div>
                                             </div>
                                             <br>
                                             </div>

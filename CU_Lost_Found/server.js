@@ -45,7 +45,7 @@ var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'root'
+	password: 'HeRm10n3124?!'
 });
 
 connection.connect(function(err) { //now connect to MySQL database
@@ -219,21 +219,43 @@ app.get('/account', function(req, res) {
 	{
 		res.render(__dirname + "/" + "views/login", {message: 'You must login to use this service!'});
 	}
-	var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "' AND Active='1' ORDER BY Listing_ID;"
-	var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "'  AND Active='0' ORDER BY Listing_ID;"
 
- 	connection.query(select_active, function(err, data) {
-		connection.query(select_inactive, function(err2, data2) {
-			if(err) {
-				throw err;
-			}
-			if(err2) {
-				throw err;
-			}
+	if(req.session.currentUserAdmin == 0) { 
+		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "' AND Active='1' ORDER BY Listing_ID;"
+		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "'  AND Active='0' ORDER BY Listing_ID;"
 
-			res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
+		connection.query(select_active, function(err, data) {
+			connection.query(select_inactive, function(err2, data2) {
+				if(err) {
+					throw err;
+				}
+				if(err2) {
+					throw err;
+				}
+
+				res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
+			});
 		});
-	});
+	}
+
+	else if(req.session.currentUserAdmin == 1) {
+		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='1' ORDER BY Listing_ID;"
+		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='0' ORDER BY Listing_ID;"
+
+		connection.query(select_active, function(err, data) {
+			connection.query(select_inactive, function(err2, data2) {
+				if(err) {
+					throw err;
+				}
+				if(err2) {
+					throw err;
+				}
+
+				res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
+			});
+		});
+
+	}
 });
 
 app.post('/edit_type', function(req, res) {
