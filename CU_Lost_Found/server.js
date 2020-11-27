@@ -1,11 +1,15 @@
 /////MODULES//////
 var http = require('http');
 var express = require('express'); //Ensure our express framework has been added
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use(bodyParser.text());
+app.use(cookieParser());
+app.use(session({secret: "shhhhh", saveUninitialized: true,resave: true}));
 //////////////////
 
 // set the view engine to ejs
@@ -41,7 +45,7 @@ var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'HeRm10n3124?!'
+	password: 'root'
 });
 
 connection.connect(function(err) { //now connect to MySQL database
@@ -81,13 +85,33 @@ app.post('/', function(req, res) { //when user logs in, their data is checked ag
 		}
 		else
 		{
-			res.redirect('/home');
+			var currentUserDataQuery = "SELECT * FROM User WHERE Email='" + email + "';";
+			connection.query(currentUserDataQuery, function(err, currUserData){
+
+				console.log(currUserData[0].User_ID);
+				req.session.currentUserID = currUserData[0].User_ID;
+				req.session.currentUserPassword = currUserData[0].Password;
+				req.session.currentUserEmail = currUserData[0].Email;
+				req.session.currentUserName = currUserData[0].Name;
+				req.session.currentUserPhone = currUserData[0].Phone;
+				req.session.currentUserAdmin = currUserData[0].Admin;
+
+				// console.log(req.session.currentUserID);
+				// console.log(req.session.currentUserPassword);
+				// console.log(req.session.currentUserEmail);
+				// console.log(req.session.currentUserName);
+				// console.log(req.session.currentUserPhone);
+				// console.log(req.session.currentUserAdmin);
+				res.redirect('/home');
+			});
+			
 		}
    });
 
 });
 
 app.post('/register', function(req, res){
+
 	var email = req.body.registerEmail;
 	var name = req.body.registerName;
 	var phone = req.body.registerPhone;
@@ -109,7 +133,8 @@ app.post('/register', function(req, res){
 				}
 				console.log("new user added");
 			});
-			res.redirect('/home');
+			//res.redirect('/');//login with your new credentials
+			res.render(__dirname + "/" + "views/login", {message: 'Your account has been created. Please login with your new credentials.'});
 		}
 		else
 		{
@@ -123,25 +148,34 @@ app.post('/register', function(req, res){
 
 //Render Lost & Found home page
 app.get('/home', function(req, res) {
+	if (!req.session.currentUserName) //only logged  in users can go to other pages
+	{
+		res.render(__dirname + "/" + "views/login", {message: 'You must login to use this service!'});
+	}
+
 	var select_statement = "SELECT * FROM Found_Listing ORDER BY Listing_ID;"
 	
+	
+
  	connection.query(select_statement, function(err, data) {
  		if(err) {
  			throw err;
- 		}
-	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+		 }
+	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data, message: req.session.currentUserName});
+
 	 //console.log(data[1].Type);
 	 });
 });
 
 app.post('/home', function(req, res) {
+
 	var select_statement = "SELECT * FROM Found_Listing ORDER BY Listing_ID;"
 	
  	connection.query(select_statement, function(err, data) {
  		if(err) {
  			throw err;
  		}
-	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data, message: req.session.currentUserName});
 	 //console.log(data[1].Type);
 	 });
 });
@@ -159,26 +193,34 @@ app.post('/search', function(req, res) {
  			throw err;
 		 }
 	console.log(data);
-	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data});
+	 res.render( __dirname + "/" + "views/Lost_and_Found_test", {db_data:data, message: req.session.currentUserName});
 	 });
 });
 
 //Render About Us page
 app.get('/about', function(req, res) {
+	if (!req.session.currentUserName) //only logged  in users can go to other pages
+	{
+		res.render(__dirname + "/" + "views/login", {message: 'You must login to use this service!'});
+	}
 	var select_statement = "SELECT Name from User;"
 	
  	connection.query(select_statement, function(err, data) {
  		if(err) {
  			throw err;
  		}
-	 res.render( __dirname + "/" + "views/about", {db_data:data});
+	 res.render( __dirname + "/" + "views/about", {db_data:data, message: req.session.currentUserName});
 	});
 });
 
 //Render Account page
 app.get('/account', function(req, res) {
-	var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='1' AND Found_Listing.User_ID='1' ORDER BY Listing_ID;"
-	var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='0' AND Found_Listing.User_ID='1' ORDER BY Listing_ID;"
+	if (!req.session.currentUserName) //only logged  in users can go to other pages
+	{
+		res.render(__dirname + "/" + "views/login", {message: 'You must login to use this service!'});
+	}
+	var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "' AND Active='1' ORDER BY Listing_ID;"
+	var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "'  AND Active='0' ORDER BY Listing_ID;"
 
  	connection.query(select_active, function(err, data) {
 		connection.query(select_inactive, function(err2, data2) {
@@ -189,7 +231,7 @@ app.get('/account', function(req, res) {
 				throw err;
 			}
 
-			res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2}); //render this page with the results of the query as the parameter
+			res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
 		});
 	});
 });
@@ -405,6 +447,10 @@ app.post('/post_item', function(req, res) {
 		res.redirect('/home'); //redirects to app.get('/home' and reloads the page with the new data)
 });
 
+app.get('/logout', function(req, res) {
+	req.session.destroy();
+	res.redirect('/');
+});
 
 
 
