@@ -36,9 +36,9 @@
           </a>
           </div>
           <div class="form-inline my-2 my-lg-0">
-          <a href="/">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
-          </a>
+            <form id="logoutForm" action="/logout" method="GET">
+              <button form="logoutForm" class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+            </form>
           </div>
           </div>
         </nav>
@@ -48,11 +48,15 @@
         <div class="jumbotron">
           <h1 class="display-4"><center>Account Information</h1></center>
           <hr class="my-5">
+          <% if(db_data3.length){ for(var i = 0;i < db_data3.length;i++) { %>
           <p> Name: <%= message %> </p> <br>
           <p> E-mail: <%= message2 %> </p> <br>
-          <p> Phone number: <%= message3 %> </p> <br>
-          <p> Password: <%= message4 %> </p> <br>
-          <a class="btn btn-primary btn-sm" href="#searchBox" role="button" style="background-color:#BC8E48; border-color:#BC8E48;">Edit information</a>
+          <p> Phone number: <%= db_data3[i].Phone %> <a href="#" onclick="editPhone(<%= db_data.id %>)" data-toggle="modal" data-target="#editPhoneModal" style="color:blue; text-decoration: underline; font-size:12px;">Edit</a> </p><br>
+          <p> Password: <%= db_data3[i].Password %> </p> <br>
+          <a class="btn btn-primary btn-sm" href="#searchBox" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" onclick="editPassword(<%= db_data.id %>)" data-toggle="modal" data-target="#editPasswordModal">Change Password</a>
+          <% } %>
+          <% }; %>
+
         </div>
     </div>  
 
@@ -356,8 +360,74 @@
             </div>
         </div>
 
+        <!--Edit User Account Information Modals:-->
+        <div class="modal fade" id="editPhoneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Phone Number</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="editPhone" action="/edit_phone" method="POST">
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <h6>Phone Number</h6>
+                              <input type="text" id="phonenumber" class="form-control" name="phonenumber">
+                              <input type="hidden" id="id_phonenumber" name="id_phonenumber" class="hiddenValue"/>
+                            </div>
+                            
+                              <div style="float:right;">
+                                  <button type="button" style="background-color:#000000;" class="btn btn-secondary" data-dismiss="modal">Cancel</button>                
+                                  <input type="submit" style="background-color:#BC8E48; border-color:#BC8E48;" form="editPhone" name="edit_phone__button" value = "Submit Changes" class="btn btn-primary"></input>
+                                  <br><br>
+                              </div>
+              </form>
+                          </div>
+            </div>
+          </div>
+      </div>
 
 
+      <div class="modal fade" id="editPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="editPassword" action="/edit_password" method="POST" onsubmit="return validatePassword()">
+                        <div class="modal-body">
+                          <div class="form-group">
+                            <h6>Current Password</h6>
+                            <input type="password" id="pword_verify" class="form-control" name="pword_verify">
+                            <input type="hidden" id="id_pword_verify" name="id_pword_verify" class="hiddenValue"/>
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <h6>New Password</h6>
+                            <input type="password" id="pword" class="form-control" name="pword">
+                            <input type="hidden" id="id_pword" name="id_pword" class="hiddenValue"/>
+                          </div>
+                          <div class="form-group">
+                            <h6>Confirm New Password</h6>
+                            <input type="password" id="pword_conf" class="form-control" name="pword_conf">
+                            <input type="hidden" id="id_pword_conf" name="id_pword_conf" class="hiddenValue"/>
+                          </div>
+                          
+                            <div style="float:right;">
+                                <button type="button" style="background-color:#000000;" class="btn btn-secondary" data-dismiss="modal">Cancel</button>                
+                                <input type="submit" style="background-color:#BC8E48; border-color:#BC8E48;" form="editPassword" name="edit_password__button" value = "Submit Changes" class="btn btn-primary"></input>
+                                <br><br>
+                            </div>
+            </form>
+                        </div>
+          </div>
+        </div>
+    </div>
 
         <div class="footer">
           <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>

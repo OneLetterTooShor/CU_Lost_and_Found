@@ -41,11 +41,12 @@ app.set('port', process.env.PORT || 8000); //Need this to start listening on por
 //connection settings are (database, user, password will be different for everyone's local machine)
 var mysql = require('mysql'); //Ensure our MySQL node has been added
 const { equal, notDeepEqual } = require('assert');
+const { select } = require('async');
 var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'HeRm10n3124?!'
+	password: 'root'
 });
 
 connection.connect(function(err) { //now connect to MySQL database
@@ -215,6 +216,16 @@ app.get('/about', function(req, res) {
 
 //Render Account page
 app.get('/account', function(req, res) {
+
+	//var select_phone = "SELECT * FROM User WHERE User.User_ID = '" + req.session.curentUserID + "' ORDER BY User_ID;"
+
+	//connection.query(select_phone, function(err, data) {
+	//	if(err) {
+	//		throw err;
+	//	}
+	//	res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, db_data3:data3, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword});
+	//});
+
 	if (!req.session.currentUserName) //only logged  in users can go to other pages
 	{
 		res.render(__dirname + "/" + "views/login", {message: 'You must login to use this service!'});
@@ -223,17 +234,24 @@ app.get('/account', function(req, res) {
 	if(req.session.currentUserAdmin == 0) { 
 		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "' AND Active='1' ORDER BY Listing_ID;"
 		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "'  AND Active='0' ORDER BY Listing_ID;"
-
+		var select_phone = "SELECT * FROM User WHERE User.User_ID = '" + req.session.currentUserID + "' ORDER BY User_ID;"
+		console.log("User id = " + req.session.currentUserID);
 		connection.query(select_active, function(err, data) {
-			connection.query(select_inactive, function(err2, data2) {
-				if(err) {
-					throw err;
-				}
-				if(err2) {
-					throw err;
-				}
-
-				res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
+				connection.query(select_inactive, function(err2, data2) {
+					connection.query(select_phone, function(err3, data3){
+						if(err) {
+							throw err;
+						}
+						if(err2) {
+							throw err;
+						}
+						if(err3) {
+							throw err;
+						}
+						console.log(select_phone);
+						console.log(req.session.currentUserID);
+						res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, db_data3:data3, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
+					});
 			});
 		});
 	}
@@ -241,17 +259,23 @@ app.get('/account', function(req, res) {
 	else if(req.session.currentUserAdmin == 1) {
 		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='1' ORDER BY Listing_ID;"
 		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='0' ORDER BY Listing_ID;"
+		var select_phone = "SELECT * FROM User WHERE User.User_ID = '" + req.session.curentUserID + "' ORDER BY User_ID;"
 
 		connection.query(select_active, function(err, data) {
-			connection.query(select_inactive, function(err2, data2) {
-				if(err) {
-					throw err;
-				}
-				if(err2) {
-					throw err;
-				}
+			connection.query(select_inactive, function(err2, data2){
+				connection.query(select_phone, function(err3, data3) {
+					if(err) {
+						throw err;
+					}
+					if(err2) {
+						throw err;
+					}
+					if(err3) {
+						throw err;
+					}
 
-				res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
+					res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, db_data3:data3, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
+				});
 			});
 		});
 
@@ -468,6 +492,49 @@ app.post('/post_item', function(req, res) {
 
 		res.redirect('/home'); //redirects to app.get('/home' and reloads the page with the new data)
 });
+
+app.post('/edit_phone', function(req, res) {
+	var id = req.session.currentUserID;
+	var newPhonenumber = req.body.phonenumber;
+
+	console.log("user id = " + id, "user phone = " + newPhonenumber);
+
+	var select_listing = "UPDATE User SET Phone ='" + newPhonenumber + "' WHERE User_ID='" + id + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		//console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+app.post('/edit_password', function(req, res) {
+	var id = req.session.currentUserID;
+	var newPassword = req.body.pword;
+
+	//console.log("user id = " + id, "user phone = " + newPhonenumber);
+
+	var select_listing = "UPDATE User SET Password ='" + newPassword + "' WHERE User_ID='" + id + "';"
+
+	connection.query(select_listing, function(err, data) {
+		if(err) {
+			throw err;
+		}
+		//console.log(data);
+	});
+
+	res.redirect('/account');
+});
+
+
+
+
+
+
+
 
 app.get('/logout', function(req, res) {
 	req.session.destroy();
