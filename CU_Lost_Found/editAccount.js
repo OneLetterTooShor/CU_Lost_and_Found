@@ -7,10 +7,9 @@ function changePassword(id) {
 
 }
 
-function validatePassword() {
-    var oldPass = document.getElementById("currPass").value;
-    var confirmPass = document.getElementById("pword_verify").value;
-    if(oldPass != confirmPass) {
+function validatePassword(currPass) {
+    var confirmPass = document.getElementById("pword_verify").innerHTML;
+    if(currPass != confirmPass) {
         alert("Current password not confirmed! Try again.");
         return false;
     }

@@ -66,7 +66,7 @@
 
         <div class="container-fluid">
           <div class="input-group mb-3">
-            <form id="searchBoxForm" action="/search" method="POST" onsubmit="return validateSearch()" style="width:900px;">
+            <form id="searchBoxForm" action="/search" method="POST" onsubmit="return validateSearch()" style="width:100%;">
             <input type="text" id="searchBox" name="searchBox" class="form-control" placeholder="Search item by type, description, date found, or location found" aria-label="Search Item" aria-describedby="basic-addon2">
             <div class="input-group-append" style="float:right; padding-top:3px;">
               <button form="searchBoxForm" class="btn btn-outline-secondary" type="submit" style="margin-right:8px;">Search</button>
@@ -111,11 +111,13 @@
             
             <% if(db_data.length){ for(var i = 0;i < db_data.length;i++) { %>
             <div class="card" id="item<%=(i+1)%>"> 
-                <div class="row no-gutters">
+                <div class="row">
                 <div class="col-md-6">
-                <img class="card-img-top" src="../resources/images/samplelost1.jpg" alt="Card image cap">
+                <img class="card-img-top" src="../resources/images/placeholder.svg" alt="Card image cap" style="margin-left:auto; margin-right:auto; margin-top:8%; margin-bottom:auto;
+                padding-bottom:-12px; padding-left:10%; width:85%; height:85%;">
                 </div>
                 <div class="col-md-6">
+                <br>
                 <br>
                 <h5 class="card-title"> <%= db_data[i].Type%> </h5>
                 <p class="card-text">Description:  <%= db_data[i].Item_Description%> </p>
