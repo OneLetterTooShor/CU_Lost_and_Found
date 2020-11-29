@@ -48,14 +48,11 @@
         <div class="jumbotron">
           <h1 class="display-4"><center>Account Information</h1></center>
           <hr class="my-5">
-          <% if(db_data3.length){ for(var i = 0;i < db_data3.length;i++) { %>
-          <p> Name: <%= message %> </p> <br>
-          <p> E-mail: <%= message2 %> </p> <br>
-          <p> Phone number: <%= db_data3[i].Phone %> <a href="#" onclick="editPhone(<%= db_data.id %>)" data-toggle="modal" data-target="#editPhoneModal" style="color:blue; text-decoration: underline; font-size:12px;">Edit</a> </p><br>
-          <p> Password: <%= db_data3[i].Password %> </p> <br>
-          <a class="btn btn-primary btn-sm" href="#searchBox" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" onclick="editPassword(<%= db_data.id %>)" data-toggle="modal" data-target="#editPasswordModal">Change Password</a>
-          <% } %>
-          <% }; %>
+          <p> Name: <%= message %> </p><br>
+          <p> E-mail: <%= message2 %> </p><br>
+          <p> Phone number: <%= db_data3[0].Phone %> <a href="#" onclick="changePhone(<%= db_data.id %>)" data-toggle="modal" data-target="#editPhoneModal" style="color:blue; text-decoration: underline; font-size:12px;">Edit</a> </p><br>
+          <p id="currPass"> Password: <%= db_data3[0].Password %> </p>
+          <a class="btn btn-primary btn-sm" href="#searchBox" role="button" style="background-color:#BC8E48; border-color:#BC8E48;" onclick="changePassword(<%= db_data.id %>)" data-toggle="modal" data-target="#editPasswordModal">Change Password</a>
 
         </div>
     </div>  
@@ -433,6 +430,7 @@
           <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>
         </div>
         <script type="text/javascript" src="../editListing.js"></script>
+        <script type="text/javascript" src="../editAccount.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

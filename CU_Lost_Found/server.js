@@ -234,7 +234,7 @@ app.get('/account', function(req, res) {
 	if(req.session.currentUserAdmin == 0) { 
 		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "' AND Active='1' ORDER BY Listing_ID;"
 		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "'  AND Active='0' ORDER BY Listing_ID;"
-		var select_phone = "SELECT * FROM User WHERE User.User_ID = '" + req.session.currentUserID + "' ORDER BY User_ID;"
+		var select_phone = "SELECT * FROM User WHERE User_ID = '" + req.session.currentUserID + "' ORDER BY User_ID;"
 		console.log("User id = " + req.session.currentUserID);
 		connection.query(select_active, function(err, data) {
 				connection.query(select_inactive, function(err2, data2) {
@@ -259,8 +259,8 @@ app.get('/account', function(req, res) {
 	else if(req.session.currentUserAdmin == 1) {
 		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='1' ORDER BY Listing_ID;"
 		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='0' ORDER BY Listing_ID;"
-		var select_phone = "SELECT * FROM User WHERE User.User_ID = '" + req.session.curentUserID + "' ORDER BY User_ID;"
-
+		var select_phone = "SELECT * FROM User WHERE User_ID = '" + req.session.currentUserID + "';"
+		console.log("User id = " + req.session.currentUserID);
 		connection.query(select_active, function(err, data) {
 			connection.query(select_inactive, function(err2, data2){
 				connection.query(select_phone, function(err3, data3) {
@@ -273,7 +273,7 @@ app.get('/account', function(req, res) {
 					if(err3) {
 						throw err;
 					}
-
+					console.log(data3);
 					res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, db_data3:data3, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
 				});
 			});
