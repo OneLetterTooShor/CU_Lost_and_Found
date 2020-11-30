@@ -94,14 +94,7 @@ function validateDelete() {
 }
 
 function validateRestore() {
-    var restoreItem = document.getElementById("restoreListingID");
-
-    alert("Success! This listing has been restored.");
-
-    // if(restoreItem) {
-    // alert("Success! This listing has been restored.");
-    // return true;
-    // }
+  alert("Success! This listing has been restored.");
 }
 
 function alertFunc() {

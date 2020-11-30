@@ -46,7 +46,7 @@ var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
 	user: 'root',
-	password: 'root'
+	password: 'HeRm10n3124?!'
 });
 
 connection.connect(function(err) { //now connect to MySQL database

@@ -1,28 +1,46 @@
-function changePhone(id) {
-    document.getElementById("id_phonenumber").value = id;
-}
+function validatePassword() {
+    var currentPass = document.getElementById("currPass").innerHTML;
+    var confirmPass = document.getElementById("pword_verify").value;
+    var firstPass= document.getElementById("pword").value;
+    var secondPass= document.getElementById("pword_conf").value;
 
-function changePassword(id) {
-    document.getElementById("id_pword").value = id;
+    if(confirmPass.length == 0) {
+        alert("Current password is required!");
+        return false;
+    }
 
-}
-
-function validatePassword(currPass) {
-    var confirmPass = document.getElementById("pword_verify").innerHTML;
-    if(currPass != confirmPass) {
+    else if(currentPass != confirmPass) {
         alert("Current password not confirmed! Try again.");
         return false;
     }
 
-    var firstPass= document.getElementById("pword").value;
-    var secondPass= document.getElementById("pword_conf").value;
+    else if(firstPass.length == 0 | secondPass.length == 0) {
+        alert("New password is required!");
+        return false;
+    }
 
-    if(firstPass != secondPass) {
+    else if(firstPass != secondPass) {
         alert("Passwords do not match! Try again!");
         return false;
     }
 
-    document.getElementById("id_pword").value = newPword;
-    console.log(newPword);
+    else {
+        alert("Password successfully updated!");
+        return true;
+    }
 
+}
+
+function validatePhone() {
+    var newPhone = document.getElementById("phonenumber").value;
+
+    if(newPhone.length == 0) {
+        alert("Field is required!");
+        return false;
+    }
+
+    else {
+        alert("Phone number successfully updated!");
+        return true;
+    }
 }

@@ -117,8 +117,7 @@
                 padding-bottom:-12px; padding-left:10%; width:85%; height:85%;">
                 </div>
                 <div class="col-md-6">
-                <br>
-                <br>
+                  <div style="margin-top:5%; margin-right:2%;">
                 <h5 class="card-title"> <%= db_data[i].Type%> </h5>
                 <p class="card-text">Description:  <%= db_data[i].Item_Description%> </p>
                 <p class="card-text">Date Found:  <%= db_data[i].Date_Found%> </p>
@@ -126,6 +125,7 @@
                 <p class="card-text">Location Returned:  <%= db_data[i].Location_Returned%> </p>
                 <p class="card-text">Date Returned: <%= db_data[i].Date_Returned%> </p>
                 <p class="card-text"><small class="text-muted">Posted  <%= db_data[i].Date_Posted%> </small></p>
+              </div>
                 </div>
                 </div>
                 <br>
@@ -190,13 +190,6 @@
                               <input id="locationReturned" type="text" class="form-control" name="locationReturned">
                             </div>
                             <br>
-                            <div class="form-group">
-                            <h6>Upload photo(s):</h6>
-                            <p style="font-size:13px;"><i>To select multiple files, hold down the CTRL or SHIFT key while selecting</i></p>
-                              <form> <!-- https://www.w3schools.com/howto/howto_html_file_upload_button.asp -->
-                                  <input type="file" id="imageFile" name="filename" multiple>
-                              </form>
-                            </div>
                         </div>
                         <br>
                         <div class="modal-footer">
