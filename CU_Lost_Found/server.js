@@ -32,8 +32,11 @@ app.use(express.static(__dirname + '/'));
 //^This code was not working with our html pages. I think that the above it just a basic example that Asa showed us
 //for very basic outputs, but something else (the below line) is needed to fully render existing HTML pages - NF
 
-app.set('port', process.env.PORT || 8000); //Need this to start listening on port 8080
-//Can change the port number depending on your local machine
+// app.set('port', process.env.PORT || 8000); //Need this to start listening on port 8080
+const PORT = process.env.PORT; //To connect to Heroku
+const server = app.listen(PORT, () => {
+	console.log(`Express running → PORT ${server.address().port}`);
+});
 
 
 //Create Database Connection:
@@ -42,6 +45,13 @@ app.set('port', process.env.PORT || 8000); //Need this to start listening on por
 var mysql = require('mysql'); //Ensure our MySQL node has been added
 const { equal, notDeepEqual } = require('assert');
 const { select } = require('async');
+// var connection = mysql.createConnection ({ //connection variable
+// 	host: 'us-cdbr-east-02.cleardb.com',
+// 	database: 'heroku_21b8de9f9451838', //Change database, user, and password based on your local machine settings
+// 	user: 'b9bf07e27113ad',
+// 	password: 'e4cede31'
+// });
+
 var connection = mysql.createConnection ({ //connection variable
 	host: 'localhost',
 	database: 'mydb', //Change database, user, and password based on your local machine settings
@@ -49,12 +59,15 @@ var connection = mysql.createConnection ({ //connection variable
 	password: 'HeRm10n3124?!'
 });
 
-connection.connect(function(err) { //now connect to MySQL database
-	if(err) { //if unsuccessful
-		return console.error('error: ' + err.message);
-	}
-	console.log('Connected to MySQL server.'); //successful
-}); 
+const isProduction = process.env.NODE_ENV === 'production'; //returns a 0 if not in production, 1 if in production (Heroku)
+connection = isProduction ? process.env.CLEARDB_DATABASE_URL : connection;
+
+// connection.connect(function(err) { //now connect to MySQL database
+// 	if(err) { //if unsuccessful
+// 		return console.error('error: ' + err.message);
+// 	}
+// 	console.log('Connected to MySQL server.'); //successful
+// }); 
 ////////////////////////
 
 
@@ -530,12 +543,6 @@ app.post('/edit_password', function(req, res) {
 });
 
 
-
-
-
-
-
-
 app.get('/logout', function(req, res) {
 	req.session.destroy();
 	res.redirect('/');
@@ -543,7 +550,6 @@ app.get('/logout', function(req, res) {
 
 
 
-
-app.listen(8000, function () {
-    console.log('Server is running.. on Port 8000');
-}); //Keep listening on port 8080
+// app.listen(8000, function () {
+//     console.log('Server is running.. on Port 8000');
+// }); //Keep listening on port 8080
