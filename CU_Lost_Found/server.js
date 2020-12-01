@@ -52,6 +52,39 @@ var connection = mysql.createConnection ({ //connection variable
 	password: 'e4cede31'
 });
 
+
+///////////////////////////////////
+//Function taken from http://sudoall.com/node-js-handling-mysql-disconnects/
+///////////////////////////////////
+function handleDisconnect() { // Recreate the connection, since the old one cannot be reused.
+	connection = mysql.createConnection ({ //connection variable
+		host: 'us-cdbr-east-02.cleardb.com',
+		database: 'heroku_21b8de9f9451838', //Change database, user, and password based on your local machine settings
+		user: 'b9bf07e27113ad',
+		password: 'e4cede31'
+	});
+
+	connection.connect(function(err) {              // The server is either down
+		if(err) {                                     // or restarting (takes a while sometimes).
+		  console.log('error when connecting to db:', err);
+		  setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+		}                                     // to avoid a hot loop, and to allow our node script to
+	  });                                     // process asynchronous requests in the meantime.
+											  // If you're also serving http, display a 503 error.
+	  connection.on('error', function(err) {
+		console.log('db error', err);
+		if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+		  handleDisconnect();                         // lost due to either server restart, or a
+		} 
+		else {                                      // connnection idle timeout (the wait_timeout
+		   throw err;     
+		 }                            // server variable configures this)
+		});
+};
+
+handleDisconnect();
+///////////////////////////////////
+
 // var connection = mysql.createConnection ({ //connection variable
 // 	host: 'localhost',
 // 	database: 'mydb', //Change database, user, and password based on your local machine settings

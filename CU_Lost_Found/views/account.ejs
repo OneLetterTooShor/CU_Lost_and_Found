@@ -92,7 +92,7 @@
                                 <br><br>
                             </form>
                             <br>
-                            <a href="#" onclick="myFunction(<%= db_data[i].Listing_ID %>)" data-toggle="modal" data-target="#deleteItemModal" style="float:right; margin-top:20px;">Delete Listing</a>
+                            <a href="#" onclick="myFunction(<%= db_data[i].Listing_ID %>)" data-toggle="modal" data-target="#deleteItemModal" style="float:right; margin-top:20px; margin-right:2%;">Delete Listing</a>
                             </div>
                             <% }; %> 
                             </div>
@@ -147,7 +147,7 @@
             <form id="editType" action="/edit_type" method="POST" onsubmit="return validateType()">
                         <div class="modal-body">
                           <div class="form-group">
-                            <h6>Item Name</h6>
+                            <h6>Item Name</h6> <h6 style="color:red">*</h6>
                             <input type="text" id="itemName" class="form-control" name="itemName">
                             <input type="hidden" id="listingID_Type" name="listingID_Type" class="hiddenValue"/>
                           </div>
@@ -176,7 +176,7 @@
                 <form id="editDescription" action="/edit_description" method="POST" onsubmit="return validateDescription()">
                             <div class="modal-body">
                               <div class="form-group">
-                                <h6>Item Description</h6>
+                                <h6>Item Description</h6> <h6 style="color:red">*</h6>
                                 <input type="text" id="itemDesc" class="form-control" name="itemDesc">
                                 <input type="hidden" id="listingID_Desc" name="listingID_Desc" class="hiddenValue"/>
                               </div>
@@ -205,7 +205,7 @@
             <form id="editDateFound" action="/edit_date_found" method="POST" onsubmit="return validateDateFound()">
                         <div class="modal-body">
                           <div class="form-group">
-                            <h6>Date Found</h6>
+                            <h6>Date Found</h6> <h6 style="color:red">*</h6>
                             <input type="text" id="dateFound" class="form-control" name="dateFound">
                             <input type="hidden" id="listingID_DateFound" name="listingID_DateFound" class="hiddenValue"/>
                           </div>
@@ -234,7 +234,7 @@
                 <form id="editLocFound" action="/edit_location_Found" method="POST" onsubmit="return validateLocFound()">
                             <div class="modal-body">
                               <div class="form-group">
-                                <h6>Location Found</h6>
+                                <h6>Location Found</h6> <h6 style="color:red">*</h6>
                                 <input type="text" id="locFound" class="form-control" name="locFound">
                                 <input type="hidden" id="listingID_LocFound" name="listingID_LocFound" class="hiddenValue"/>
                               </div>
@@ -263,7 +263,7 @@
             <form id="editDateReturned" action="/edit_date_returned" method="POST" onsubmit="return validateDateRet()">
                         <div class="modal-body">
                           <div class="form-group">
-                            <h6>Date Returned</h6>
+                            <h6>Date Returned</h6> <h6 style="color:red">*</h6>
                             <input type="text" id="dateReturned" class="form-control" name="dateReturned">
                             <input type="hidden" id="listingID_DateRet" name="listingID_DateRet" class="hiddenValue"/>
                           </div>
@@ -292,7 +292,7 @@
                 <form id="editLocationReturned" action="/edit_location_returned" method="POST" onsubmit="return validateLocRet()">
                             <div class="modal-body">
                               <div class="form-group">
-                                <h6>Location Returned</h6>
+                                <h6>Location Returned</h6> <h6 style="color:red">*</h6>
                                 <input type="text" id="locationReturned" class="form-control" name="locationReturned">
                                 <input type="hidden" id="listingID_LocRet" name="listingID_LocRet" class="hiddenValue"/>
                               </div>
@@ -431,7 +431,7 @@
     </div>
 
         <div class="footer">
-          <a style="color:white;" href="https://www.colorado.edu/">University of Colorado Boulder</a>
+          <a style="color:white;" href="https://www.colorado.edu/" target="_blank">University of Colorado Boulder</a>
         </div>
         <script type="text/javascript" src="../editListing.js"></script>
         <script type="text/javascript" src="../editAccount.js"></script>
