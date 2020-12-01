@@ -92,13 +92,9 @@
                                 <br><br>
                             </form>
                             <br>
-                            <a href="#" onclick="myFunction(<%= db_data[i].Listing_ID %>)" data-toggle="modal" data-target="#deleteItemModal" style="float:right; margin-top:20px; margin-right:20px;">Delete Listing</a>
+                            <a href="#" onclick="myFunction(<%= db_data[i].Listing_ID %>)" data-toggle="modal" data-target="#deleteItemModal" style="float:right; margin-top:20px;">Delete Listing</a>
                             </div>
                             <% }; %> 
-
-                            <% if(userAdmin == 0) { %>
-                              <a href="#" onclick="myFunction(<%= db_data[i].Listing_ID %>)" data-toggle="modal" data-target="#deleteItemModal" style="float:right; margin-top:20px; margin-right:20px;">Delete Listing</a>
-                              <% }; %>
                             </div>
                             </div>
                             <br>

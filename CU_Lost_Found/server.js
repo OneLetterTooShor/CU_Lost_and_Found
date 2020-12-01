@@ -45,29 +45,30 @@ const server = app.listen(PORT, () => {
 var mysql = require('mysql'); //Ensure our MySQL node has been added
 const { equal, notDeepEqual } = require('assert');
 const { select } = require('async');
-// var connection = mysql.createConnection ({ //connection variable
-// 	host: 'us-cdbr-east-02.cleardb.com',
-// 	database: 'heroku_21b8de9f9451838', //Change database, user, and password based on your local machine settings
-// 	user: 'b9bf07e27113ad',
-// 	password: 'e4cede31'
-// });
-
 var connection = mysql.createConnection ({ //connection variable
-	host: 'localhost',
-	database: 'mydb', //Change database, user, and password based on your local machine settings
-	user: 'root',
-	password: 'HeRm10n3124?!'
+	host: 'us-cdbr-east-02.cleardb.com',
+	database: 'heroku_21b8de9f9451838', //Change database, user, and password based on your local machine settings
+	user: 'b9bf07e27113ad',
+	password: 'e4cede31'
 });
 
-const isProduction = process.env.NODE_ENV === 'production'; //returns a 0 if not in production, 1 if in production (Heroku)
-connection = isProduction ? process.env.CLEARDB_DATABASE_URL : connection;
+// var connection = mysql.createConnection ({ //connection variable
+// 	host: 'localhost',
+// 	database: 'mydb', //Change database, user, and password based on your local machine settings
+// 	user: 'root',
+// 	password: 'HeRm10n3124?!'
+// });
 
-// connection.connect(function(err) { //now connect to MySQL database
-// 	if(err) { //if unsuccessful
-// 		return console.error('error: ' + err.message);
-// 	}
-// 	console.log('Connected to MySQL server.'); //successful
-// }); 
+// const isProduction = process.env.NODE_ENV === 'production'; //returns a 0 if not in production, 1 if in production (Heroku)
+// connection = isProduction ? process.env.CLEARDB_DATABASE_URL : connection;
+
+
+connection.connect(function(err) { //now connect to MySQL database
+	if(err) { //if unsuccessful
+		return console.error('error: ' + err.message);
+	}
+	console.log('Connected to MySQL server.'); //successful
+}); 
 ////////////////////////
 
 
@@ -245,8 +246,8 @@ app.get('/account', function(req, res) {
 	}
 
 	if(req.session.currentUserAdmin == 0) { 
-		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "' AND Active='1' ORDER BY Listing_ID;"
-		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND User.User_ID ='" + req.session.currentUserID + "'  AND Active='0' ORDER BY Listing_ID;"
+		var select_active = "SELECT * FROM Found_Listing WHERE User_ID ='" + req.session.currentUserID + "' AND Active='1' ORDER BY Listing_ID;"
+		var select_inactive = "SELECT * FROM Found_Listing WHERE User_ID ='" + req.session.currentUserID + "'  AND Active='0' ORDER BY Listing_ID;"
 		var select_phone = "SELECT * FROM User WHERE User_ID = '" + req.session.currentUserID + "' ORDER BY User_ID;"
 		console.log("User id = " + req.session.currentUserID);
 		connection.query(select_active, function(err, data) {
@@ -270,8 +271,8 @@ app.get('/account', function(req, res) {
 	}
 
 	else if(req.session.currentUserAdmin == 1) {
-		var select_active = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='1' ORDER BY Listing_ID;"
-		var select_inactive = "SELECT * FROM Found_Listing, User WHERE Found_Listing.User_ID = User.User_ID AND Active='0' ORDER BY Listing_ID;"
+		var select_active = "SELECT * FROM Found_Listing WHERE Active='1' ORDER BY Listing_ID;"
+		var select_inactive = "SELECT * FROM Found_Listing WHERE Active='0' ORDER BY Listing_ID;"
 		var select_phone = "SELECT * FROM User WHERE User_ID = '" + req.session.currentUserID + "';"
 		console.log("User id = " + req.session.currentUserID);
 		connection.query(select_active, function(err, data) {
@@ -286,7 +287,7 @@ app.get('/account', function(req, res) {
 					if(err3) {
 						throw err;
 					}
-					console.log(data3);
+					console.log(data, data2, data3);
 					res.render( __dirname + "/" + "views/account", {db_data:data, db_data2:data2, db_data3:data3, userAdmin: req.session.currentUserAdmin, message: req.session.currentUserName, message2: req.session.currentUserEmail, message3: req.session.currentUserPhone, message4: req.session.currentUserPassword}); //render this page with the results of the query as the parameter
 				});
 			});
@@ -493,7 +494,7 @@ app.post('/post_item', function(req, res) {
 		var date = month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm;
 		//var imgLink
 
-		var insert_statement = "INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted) VALUES('1', '" + itemName + "','" +
+		var insert_statement = "INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted) VALUES('" + req.session.currentUserID + "', '" + itemName + "','" +
 		itemDescription + "','" + dateFound + "','" + locFound + "', '" + dateReturned + "', '" + locReturned + "', '" + date + "');";
 		
 		connection.query(insert_statement, function(err, result) {
