@@ -201,7 +201,7 @@ app.get('/home', function(req, res) {
 		res.render(__dirname + "/" + "views/login", {message: 'You must login to use this service!'});
 	}
 
-	var select_statement = "SELECT * FROM Found_Listing ORDER BY Listing_ID;"
+	var select_statement = "SELECT * FROM Found_Listing WHERE Active='1' ORDER BY Date_Posted DESC;"
 	
 	
 
@@ -217,7 +217,7 @@ app.get('/home', function(req, res) {
 
 app.post('/home', function(req, res) {
 
-	var select_statement = "SELECT * FROM Found_Listing ORDER BY Listing_ID;"
+	var select_statement = "SELECT * FROM Found_Listing WHERE Active='1' ORDER BY Date_Posted DESC;"
 	
  	connection.query(select_statement, function(err, data) {
  		if(err) {
@@ -508,10 +508,10 @@ app.post('/post_item', function(req, res) {
 		var dateReturned = req.body.dateReturned;
 		var locReturned = req.body.locationReturned;
 		var datePosted = new Date();
-		var month = datePosted.getMonth();
+		var month = datePosted.getMonth() + 1;
 		var day = datePosted.getDate();
 		var year = datePosted.getFullYear();
-		var hour = datePosted.getHours();
+		var hour = datePosted.getHours() + 1;
 		var minute = datePosted.getMinutes();
 		var ampm = "AM MST";
 		if(hour > 12) {
@@ -525,7 +525,6 @@ app.post('/post_item', function(req, res) {
 			minute = "0" + minute;
 		}
 		var date = month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm;
-		//var imgLink
 
 		var insert_statement = "INSERT INTO Found_Listing(User_ID, Type, Item_Description, Date_Found, Location_Found, Date_Returned, Location_Returned, Date_Posted) VALUES('" + req.session.currentUserID + "', '" + itemName + "','" +
 		itemDescription + "','" + dateFound + "','" + locFound + "', '" + dateReturned + "', '" + locReturned + "', '" + date + "');";
