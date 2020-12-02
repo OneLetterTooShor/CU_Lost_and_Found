@@ -233,7 +233,7 @@ app.post('/search', function(req, res) {
 	var searchTerm = req.body.searchBox;
 	console.log(searchTerm);
 
-	var select_statement = "SELECT * FROM Found_Listing WHERE Type LIKE '%" + searchTerm + "%' OR Item_Description LIKE'%" + searchTerm + "%' OR Date_Found LIKE '%" + searchTerm + "%' OR Location_Found LIKE '%" + searchTerm + "%' ORDER BY Listing_ID;"
+	var select_statement = "SELECT * FROM Found_Listing WHERE Active = '1' AND Type LIKE '%" + searchTerm + "%' OR Item_Description LIKE'%" + searchTerm + "%' OR Date_Found LIKE '%" + searchTerm + "%' OR Location_Found LIKE '%" + searchTerm + "%' ORDER BY Listing_ID;"
 
 	
  	connection.query(select_statement, function(err, data) {
