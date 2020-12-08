@@ -21,10 +21,10 @@ While only the EJS files are actively being used, the views folder contains both
 The files are structured as:<br>
 -database (includes database files such as SQL to create tables and test entries, data model, and test queries)<br>
 -resources<br>
-  -css (includes css for each page)<br>
-  -images (includes all photos used for entire application)<br>
+&nbsp;&nbsp;-css (includes css for each page)<br>
+&nbsp;&nbsp;-images (includes all photos used for entire application)<br>
 -views<br>
-  -about.ejs<br>
+&nbsp;&nbsp;-about.ejs<br>
   -about.html (not used)<br>
   -account.ejs<br>
   -account.html (not used)<br>
