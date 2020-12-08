@@ -25,13 +25,13 @@ The files are structured as:<br>
 &nbsp;&nbsp;-images (includes all photos used for entire application)<br>
 -views<br>
 &nbsp;&nbsp;-about.ejs<br>
-  -about.html (not used)<br>
-  -account.ejs<br>
-  -account.html (not used)<br>
-  -index.html (not used)<br>
-  -login.ejs<br>
-  -login.html (not used)<br>
-  -Lost_and_Found_test.ejs<br>
+&nbsp;&nbsp;-about.html (not used)<br>
+&nbsp;&nbsp;-account.ejs<br>
+&nbsp;&nbsp;-account.html (not used)<br>
+&nbsp;&nbsp;-index.html (not used)<br>
+&nbsp;&nbsp;-login.ejs<br>
+&nbsp;&nbsp;-login.html (not used)<br>
+&nbsp;&nbsp;-Lost_and_Found_test.ejs<br>
 -node_modules<br>
 -server.js<br>
 -login.js<br>
