@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="../resources/css/main.css">
+        <link rel="stylesheet" href="../resources/css/lost_found.css">
+        <link rel="stylesheet" href="../resources/css/login.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      </head>
+      <body>
+        <!--This is the section for the navbar. Make sure to include on all html pages.-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+          <a class="navbar-brand" href="https://www.colorado.edu/" target="_blank">
+            <img class="rounded-circle" src="../resources/images/favicon.ico" alt="" width="30" height="30">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+        <!--End Navbar section-->
+
+      <div class="body_content" style="width:725px; margin-left: auto; margin-right: auto;">
+        <div class="jumbotron">
+          <h1 class="display-4"><center>Lost and Found<br>Account Login</h1></center>
+          <br>
+          <form id="loginForm" action="/home" method = "POST"> <!--This accesses the app.post("/home") on server.js-->
+            <div class="form-group">
+              <label for="emailLoginInput">Email address</label>
+              <input type="email" class="form-control" id="emailLoginInput" name="emailLoginInput" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+              <label for="passwordLoginInput">Password</label>
+              <input type="password" class="form-control" id="passwordLoginInput" name="passwordLoginInput" placeholder="Enter Password">
+            </div>
+            <small id="emailHelp" class="form-text text-muted">
+            <medium style="color:red">You must login with a valid account to access this service</medium>
+            <br>
+            Don't have an account? Register <a href="#registerModal" data-toggle="modal" onclick=openModal()>here</a></small>
+            <br>
+            <button type="submit" form="loginForm" class="btn btn-primary" style="background-color:#BC8E48; border-color:#BC8E48; float:right;">Submit</button>
+          </form>
+        </div>
+      </div>
+
+    <form id="registerForm" action="/register" method = "POST">
+      <div id="registerModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="avatar">
+                <img src="../resources/images/favicon.ico" alt="registerLogo">
+              </div>
+              <h4 class="modal-title">Register for a New Account</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="emailInput" type="text" class="form-control" name="registerEmail" placeholder="Colorado Email (ex. josm1234@colorado.edu)"
+                  required="required">
+                  <p id="emailInputHelp" style="font-size:13px; color:red">Please Enter a Valid Email!</p>
+              </div>
+              
+              <div class="form-group">
+                <input type="text" class="form-control" name="registerName" placeholder="Full Name (ex. John Smith)"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="registerPhone" placeholder="Phone Number (ex. 123-456-7890)"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <input id="psw" type="password" class="form-control" name="registerPassword" placeholder="Password"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <input id="cpsw" type="password" class="form-control" name="registerConfirmPassword"
+                  placeholder="Confirm Password" required="required">
+              </div>
+              <div class="form-group">
+                <button id="my_submit_button" form="registerForm" class="btn btn-primary btn-block login-btn"  style="background-color:#BC8E48; border-color:#BC8E48;" disabled
+                  >Sign Up</button>
+              </div>
+            </div>
+        
+				<div class="modal-footer">
+					<div id="message" style="display:block">
+						<h3>Password must contain the following:</h3>
+						<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+						<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+						<p id="number" class="invalid">A <b>number</b></p>
+						<p id="length" class="invalid">Minimum <b>8 characters</b></p>
+						<p id="match" class="invalid">Password and Confirm Password Match</p>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+</form>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script type="text/javascript" src="../login.js"></script>
+      </body>
+    </html>
