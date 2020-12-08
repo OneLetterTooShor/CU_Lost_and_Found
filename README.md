@@ -14,11 +14,11 @@ Once logged in, users have the ability to post found items or search for lost it
 
 Additionally, users may manage account information and active listings from their Account page. Admin accounts may mark items as Claimed, Deleted, or Restored from inactive status.
 
-The repository structure includes two main folders: A locally working copy of the code, and the final code which has been deployed to Heroku.
+The repository structure includes two main folders: A locally working copy of the code (CU_Lost_Found), and the final code which has been deployed to Heroku (cuboulder-lost-and-found-heroku).
 
 While only the EJS files are actively being used, the views folder contains both EJS and HTML files in case a revert to HTML is needed for some reason.
 
-The files are structured as:<br>
+Within CU_Lost_Found and cuboulder-lost-and-found-heroku, the files are structured as:<br>
 -<b>database (includes database files such as SQL to create tables and test entries, data model, and test queries)</b><br>
 -<b>resources</b><br>
 &nbsp;&nbsp;-css (includes css for each page)<br>
