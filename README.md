@@ -6,7 +6,7 @@ Navigate to the website and create a new account or login with an existing accou
 
 New accounts are automatically created as non-admin and have limited functionality on the Account page.
 For testing purposes, we have already created an admin account and a non-admin account for you to login with. 
-The credentials are as follows:
+The credentials are as follows:<br>
 Admin: Email: admin1234@colorado.edu Password: Password123
 Non-Admin: Email: stud1234@colorado.edu Password: Password012
 
