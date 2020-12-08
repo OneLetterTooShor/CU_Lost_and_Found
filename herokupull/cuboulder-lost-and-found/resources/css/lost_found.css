@@ -1,0 +1,43 @@
+.body_content{
+  padding-top:2em;
+    margin-left:20%;
+    margin-right:20%;
+
+}
+.jumbotron{
+    height:35em;
+}
+.jumbotron .lost{
+    padding:20px;
+    width:50%;
+    border-right:1px solid rgba(0,0,0,.1);
+} 
+.jumbotron .found{
+    padding:20px;
+    width:50%;
+}
+.container-fluid{
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+    background-color:#e9ecef;
+    padding-top:2em;
+    padding-bottom:2em;
+}
+  .input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+
+  .input-group.md-form.form-sm.form-2 input.black-border {
+    border: 1px solid black;
+  }
+
+  h6 {
+    display:inline;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
