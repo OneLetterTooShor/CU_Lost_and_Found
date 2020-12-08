@@ -38,5 +38,8 @@ Within CU_Lost_Found and cuboulder-lost-and-found-heroku, the files are structur
 -editAcount.js<br>
 -editListing.js<br>
 -addItemCard.js (not used)<br>
--package-lock.jason<br>
+-package-lock.json<br>
 -package.json<br>
+
+Testing:
+To test our application, we used User Acceptance Testing to make sure our application was working and ready to deploy. Beacuse of this, there is nothing needed to run in order to test our app.
