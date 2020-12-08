@@ -1,5 +1,7 @@
 # 101-7-stackoverflowers
 
+In our repository, there are 2 folders of code pertaining to our project, CU_Lost_Found and cuboulder-lost-and-found-heroku. The CU_Lost_Found contains our final code used to host our app and updated database files. The cuboulder-lost-and-found-heroku contains the same code files, non-updated database files, and is a direct pull from the live version of our web-app on heroku. 
+
 The CU Boulder Lost & Found app is deployed on Heroku: https://cuboulder-lost-and-found.herokuapp.com/
 
 Navigate to the website and create a new account or login with an existing account. 
