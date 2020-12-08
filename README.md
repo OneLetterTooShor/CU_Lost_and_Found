@@ -19,11 +19,11 @@ The repository structure includes two main folders: A locally working copy of th
 While only the EJS files are actively being used, the views folder contains both EJS and HTML files in case a revert to HTML is needed for some reason.
 
 The files are structured as:<br>
--database (includes database files such as SQL to create tables and test entries, data model, and test queries)<br>
--resources<br>
+-<b>database (includes database files such as SQL to create tables and test entries, data model, and test queries)</b><br>
+-<b>resources</b><br>
 &nbsp;&nbsp;-css (includes css for each page)<br>
 &nbsp;&nbsp;-images (includes all photos used for entire application)<br>
--views<br>
+-<b>views</b><br>
 &nbsp;&nbsp;-about.ejs<br>
 &nbsp;&nbsp;-about.html (not used)<br>
 &nbsp;&nbsp;-account.ejs<br>
@@ -32,7 +32,7 @@ The files are structured as:<br>
 &nbsp;&nbsp;-login.ejs<br>
 &nbsp;&nbsp;-login.html (not used)<br>
 &nbsp;&nbsp;-Lost_and_Found_test.ejs<br>
--node_modules<br>
+-<b>node_modules</b><br>
 -server.js<br>
 -login.js<br>
 -editAcount.js<br>
