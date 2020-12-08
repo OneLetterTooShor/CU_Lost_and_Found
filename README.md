@@ -7,8 +7,8 @@ Navigate to the website and create a new account or login with an existing accou
 New accounts are automatically created as non-admin and have limited functionality on the Account page.<br>
 For testing purposes, we have already created an admin account and a non-admin account for you to login with.<br>
 The credentials are as follows:<br>
-Admin: Email: admin1234@colorado.edu Password: Password123<br>
-Non-Admin: Email: stud1234@colorado.edu Password: Password012
+<b>Admin:</b> Email: admin1234@colorado.edu Password: Password123<br>
+<b>Non-Admin:</b> Email: stud1234@colorado.edu Password: Password012
 
 Once logged in, users have the ability to post found items or search for lost items from the Lost & Found page.
 
@@ -23,20 +23,20 @@ The files are structured as:<br>
 -resources<br>
   -css (includes css for each page)<br>
   -images (includes all photos used for entire application)<br>
--views
-  -about.ejs
-  -about.html (not used)
-  -account.ejs
-  -account.html (not used)
-  -index.html (not used)
-  -login.ejs
-  -login.html (not used)
-  -Lost_and_Found_test.ejs
--node_modules
--server.js
--login.js
--editAcount.js
--editListing.js
--addItemCard.js (not used)
--package-lock.jason
--package.json
+-views<br>
+  -about.ejs<br>
+  -about.html (not used)<br>
+  -account.ejs<br>
+  -account.html (not used)<br>
+  -index.html (not used)<br>
+  -login.ejs<br>
+  -login.html (not used)<br>
+  -Lost_and_Found_test.ejs<br>
+-node_modules<br>
+-server.js<br>
+-login.js<br>
+-editAcount.js<br>
+-editListing.js<br>
+-addItemCard.js (not used)<br>
+-package-lock.jason<br>
+-package.json<br>
