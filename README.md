@@ -4,10 +4,10 @@ The CU Boulder Lost & Found app is deployed on Heroku: https://cuboulder-lost-an
 
 Navigate to the website and create a new account or login with an existing account. 
 
-New accounts are automatically created as non-admin and have limited functionality on the Account page.
-For testing purposes, we have already created an admin account and a non-admin account for you to login with. 
+New accounts are automatically created as non-admin and have limited functionality on the Account page.<br>
+For testing purposes, we have already created an admin account and a non-admin account for you to login with.<br>
 The credentials are as follows:<br>
-Admin: Email: admin1234@colorado.edu Password: Password123
+Admin: Email: admin1234@colorado.edu Password: Password123<br>
 Non-Admin: Email: stud1234@colorado.edu Password: Password012
 
 Once logged in, users have the ability to post found items or search for lost items from the Lost & Found page.
@@ -18,11 +18,11 @@ The repository structure includes two main folders: A locally working copy of th
 
 While only the EJS files are actively being used, the views folder contains both EJS and HTML files in case a revert to HTML is needed for some reason.
 
-The files are structured as:
--database (includes database files such as SQL to create tables and test entries, data model, and test queries)
--resources
-  -css (includes css for each page)
-  -images (includes all photos used for entire application)
+The files are structured as:<br>
+-database (includes database files such as SQL to create tables and test entries, data model, and test queries)<br>
+-resources<br>
+  -css (includes css for each page)<br>
+  -images (includes all photos used for entire application)<br>
 -views
   -about.ejs
   -about.html (not used)
